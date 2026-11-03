@@ -3,87 +3,796 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Fair Candidate Review Check</title>
+
 <style>
-:root{--navy:#12355b;--blue:#0b568f;--gold:#f2c14e;--text:#1f2933;--pale:#f3f7fa;--line:#c8d2dc;--success:#176b46;--danger:#8c2f39;--white:#fff}
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:#fff;font-size:16px;line-height:1.55}
-.wrap{max-width:1050px;margin:0 auto;padding:20px}
-.activity{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
-.head{padding:18px 22px;background:var(--navy);color:#fff;border-left:7px solid var(--gold)}
-.eyebrow{margin:0 0 4px;font-size:13px;font-weight:700;letter-spacing:.05em}
-h1{margin:0;font-size:24px;line-height:1.25}
-.intro{margin:0;padding:18px 22px 6px}
-.question{margin:12px 22px 0;padding:20px 0 0;border-top:1px solid var(--line)}
-.qnum{margin:0 0 4px;color:var(--blue);font-size:13px;font-weight:700;letter-spacing:.05em}
-h2{margin:0 0 10px;color:var(--navy);font-size:20px;line-height:1.35}
-.case{margin:0 0 14px;padding:14px 16px;background:var(--pale);border-left:5px solid var(--navy)}
-.options{display:grid;gap:10px}
-.option,.smallbtn{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--navy);border-radius:5px;background:#fff;color:var(--navy)}
-.option{width:100%;padding:13px 15px;text-align:left}
-.smallbtn{padding:9px 12px}
-.option:hover,.option:focus-visible,.smallbtn:hover,.smallbtn:focus-visible{background:var(--pale);outline:3px solid var(--gold);outline-offset:2px}
-.option[aria-pressed="true"]{background:var(--navy);color:#fff}
-.feedback{margin:12px 0 0;padding:12px 14px;background:var(--pale);border-left:5px solid var(--navy)}
-.feedback.good{border-left-color:var(--success)} .feedback.bad{border-left-color:var(--danger)}
-.footer{margin:22px;padding:18px 20px;background:var(--pale);border-left:6px solid var(--navy)}
-.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.celebration{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:9999}
-.confetti{position:absolute;top:-20px;width:10px;height:18px;opacity:.95;animation:fall 1.8s linear forwards}
-@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:1}}
-@media(prefers-reduced-motion:reduce){.confetti{display:none!important}}
-@media(max-width:700px){.wrap{padding:12px}.head,.intro,.footer{padding-left:16px;padding-right:16px}.question{margin-left:16px;margin-right:16px}h1{font-size:22px}h2{font-size:19px}}
+:root {
+    --navy: #12355b;
+    --blue: #0b568f;
+    --gold: #f2c14e;
+    --text: #1f2933;
+    --pale: #f3f7fa;
+    --line: #c8d2dc;
+    --success: #176b46;
+    --danger: #8c2f39;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: var(--white);
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+.wrap {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.activity {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--white);
+}
+
+.head {
+    padding: 18px 22px;
+    background: var(--navy);
+    color: var(--white);
+    border-left: 7px solid var(--gold);
+}
+
+.eyebrow {
+    margin: 0 0 4px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .05em;
+}
+
+h1 {
+    margin: 0;
+    color: var(--white);
+    font-size: 24px;
+    line-height: 1.25;
+}
+
+.intro {
+    margin: 0;
+    padding: 18px 22px 6px;
+}
+
+.question {
+    margin: 12px 22px 0;
+    padding: 20px 0 0;
+    border-top: 1px solid var(--line);
+}
+
+.qnum {
+    margin: 0 0 4px;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+h2 {
+    margin: 0 0 10px;
+    color: var(--navy);
+    font-size: 20px;
+    line-height: 1.35;
+}
+
+.case {
+    margin: 0 0 14px;
+    padding: 14px 16px;
+    background: var(--pale);
+    border-left: 5px solid var(--navy);
+}
+
+.options {
+    display: grid;
+    gap: 10px;
+}
+
+.option,
+.smallbtn {
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid var(--navy);
+    border-radius: 5px;
+    background: var(--white);
+    color: var(--navy);
+}
+
+.option {
+    width: 100%;
+    padding: 13px 15px;
+    text-align: left;
+}
+
+.smallbtn {
+    padding: 9px 12px;
+}
+
+.option:hover,
+.option:focus-visible,
+.smallbtn:hover,
+.smallbtn:focus-visible {
+    background: var(--pale);
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+}
+
+.option[aria-pressed="true"] {
+    background: var(--navy);
+    color: var(--white);
+}
+
+.feedback {
+    margin: 12px 0 0;
+    padding: 12px 14px;
+    background: var(--pale);
+    border-left: 5px solid var(--navy);
+}
+
+.feedback.good {
+    border-left-color: var(--success);
+}
+
+.feedback.bad {
+    border-left-color: var(--danger);
+}
+
+.footer {
+    margin: 22px;
+    padding: 18px 20px;
+    background: var(--pale);
+    border-left: 6px solid var(--navy);
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.celebration {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.confetti {
+    position: absolute;
+    top: -20px;
+    width: 10px;
+    height: 18px;
+    opacity: .95;
+    animation: fall 1.8s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .confetti {
+        display: none !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .wrap {
+        padding: 12px;
+    }
+
+    .head,
+    .intro,
+    .footer {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .question {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    h2 {
+        font-size: 19px;
+    }
+}
 </style>
 </head>
+
 <body>
+
 <main class="wrap">
-<section class="activity" aria-labelledby="title">
-<header class="head"><p class="eyebrow">CHECK YOUR UNDERSTANDING</p><h1 id="title">Review Candidates Fairly</h1></header>
-<p class="intro">Choose the best decision for each screening situation. Both must be correct to complete the check.</p>
+
+<section class="activity" aria-labelledby="activity-title">
+
+<header class="head">
+    <p class="eyebrow">CHECK YOUR UNDERSTANDING</p>
+    <h1 id="activity-title">Review Candidates Fairly</h1>
+</header>
+
+<p class="intro">
+    Choose the best decision for each screening situation. Both answers must be correct to complete the activity.
+</p>
 
 <section class="question" id="q1">
-<p class="qnum">QUESTION 1</p>
-<h2>Which candidate should advance based on the information provided?</h2>
-<div class="case"><strong>Candidate A</strong> meets every minimum qualification and has eight years of relevant experience.<br><strong>Candidate B</strong> attended a prestigious university but is missing one minimum qualification.</div>
-<div class="options" role="group" aria-label="Question 1 answer choices">
-<button class="option" type="button" data-q="1" data-correct="true" aria-pressed="false">Candidate A, because the posted qualifications and submitted evidence should guide screening.</button>
-<button class="option" type="button" data-q="1" data-correct="false" aria-pressed="false">Candidate B, because institutional prestige can offset one missing minimum qualification.</button>
-<button class="option" type="button" data-q="1" data-correct="false" aria-pressed="false">Advance both automatically because the committee should avoid making distinctions during screening.</button>
-</div>
-<div class="feedback" id="f1" aria-live="polite" hidden></div>
+
+    <p class="qnum">QUESTION 1</p>
+
+    <h2>
+        Which candidate should advance based on the information provided?
+    </h2>
+
+    <div class="case">
+        <strong>Candidate A</strong> meets every minimum qualification and has eight years of relevant experience.
+        <br><br>
+        <strong>Candidate B</strong> attended a prestigious university but is missing one minimum qualification.
+    </div>
+
+    <div class="options" role="group" aria-label="Question 1 answer choices">
+
+        <button class="option"
+                type="button"
+                data-q="1"
+                data-correct="true"
+                aria-pressed="false">
+            Candidate A, because the posted qualifications and submitted evidence should guide screening.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="1"
+                data-correct="false"
+                aria-pressed="false">
+            Candidate B, because institutional prestige can offset one missing minimum qualification.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="1"
+                data-correct="false"
+                aria-pressed="false">
+            Advance both automatically because the committee should avoid making distinctions during screening.
+        </button>
+
+    </div>
+
+    <div class="feedback" id="f1" aria-live="polite" hidden></div>
+
 </section>
 
 <section class="question" id="q2">
-<p class="qnum">QUESTION 2</p>
-<h2>A committee member says, “I know that university. Anyone from there will be excellent.” What should the committee do?</h2>
-<div class="options" role="group" aria-label="Question 2 answer choices">
-<button class="option" type="button" data-q="2" data-correct="false" aria-pressed="false">Give the candidate extra weight because the committee member has first-hand knowledge of the institution.</button>
-<button class="option" type="button" data-q="2" data-correct="true" aria-pressed="false">Return to the agreed criteria and evaluate the individual candidate's submitted evidence.</button>
-<button class="option" type="button" data-q="2" data-correct="false" aria-pressed="false">Search online for more information about the university before scoring the candidate.</button>
-</div>
-<div class="feedback" id="f2" aria-live="polite" hidden></div>
+
+    <p class="qnum">QUESTION 2</p>
+
+    <h2>
+        A committee member says, "I know that university. Anyone from there will be excellent."
+    </h2>
+
+    <div class="options" role="group" aria-label="Question 2 answer choices">
+
+        <button class="option"
+                type="button"
+                data-q="2"
+                data-correct="false"
+                aria-pressed="false">
+            Give the candidate extra weight because the committee member has first-hand knowledge of the institution.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="2"
+                data-correct="true"
+                aria-pressed="false">
+            Return to the agreed criteria and evaluate the individual candidate's submitted evidence.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="2"
+                data-correct="false"
+                aria-pressed="false">
+            Search online for more information about the university before scoring the candidate.
+        </button>
+
+    </div>
+
+    <div class="feedback" id="f2" aria-live="polite" hidden></div>
+
 </section>
 
 <div class="footer">
-<p id="status" style="margin:0"><strong>Complete both questions.</strong> You may revise an answer after reading the feedback.</p>
-<div class="controls"><button class="smallbtn" id="sound" type="button" aria-pressed="false">Sound: Off</button><button class="smallbtn" id="reset" type="button">Reset activity</button></div>
+
+    <p id="status" style="margin: 0;">
+        <strong>Complete both questions.</strong>
+        You may revise an answer after reading the feedback.
+    </p>
+
+    <div class="controls">
+        <button class="smallbtn"
+                id="reset"
+                type="button">
+            Reset activity
+        </button>
+    </div>
+
 </div>
+
 </section>
 </main>
-<div class="celebration" id="celebration" aria-hidden="true"></div>
+
+<div class="celebration"
+     id="celebration"
+     aria-hidden="true"></div>
+
 <script>
-(function(){
-const ans={1:null,2:null};let soundOn=false,celebrated=false;
-const status=document.getElementById('status'),sound=document.getElementById('sound'),reset=document.getElementById('reset'),celebration=document.getElementById('celebration');
-const feedback={1:{good:'<strong>Correct.</strong> Minimum qualifications and job-related evidence guide the screening decision. Prestige does not replace a missing minimum qualification.',bad:'<strong>Not quite.</strong> Use the posted qualifications and the evidence in the submitted application materials.'},2:{good:'<strong>Correct.</strong> Institutional reputation is not a substitute for evaluating the individual candidate.',bad:'<strong>Not quite.</strong> Return to the agreed criteria rather than relying on reputation or outside information.'}};
-function update(){const complete=ans[1]!==null&&ans[2]!==null,all=ans[1]===true&&ans[2]===true;if(all){status.innerHTML='<strong>Both answers are correct.</strong> You applied the same job-related standard to both situations.';if(!celebrated){celebrated=true;confetti();if(soundOn)tone(false)}}else if(complete){status.innerHTML='<strong>One or more answers needs another look.</strong> Review the feedback and try again.'}else{status.innerHTML='<strong>Complete both questions.</strong> You may revise an answer after reading the feedback.'}}
-document.querySelectorAll('.option').forEach(btn=>btn.addEventListener('click',()=>{const q=Number(btn.dataset.q),ok=btn.dataset.correct==='true';ans[q]=ok;document.querySelectorAll('[data-q="'+q+'"]').forEach(b=>b.setAttribute('aria-pressed',b===btn?'true':'false'));const f=document.getElementById('f'+q);f.hidden=false;f.className='feedback '+(ok?'good':'bad');f.innerHTML=ok?feedback[q].good:feedback[q].bad;update()}));
-sound.addEventListener('click',()=>{soundOn=!soundOn;sound.setAttribute('aria-pressed',String(soundOn));sound.textContent='Sound: '+(soundOn?'On':'Off');if(soundOn)tone(true)});
-reset.addEventListener('click',()=>{ans[1]=ans[2]=null;celebrated=false;document.querySelectorAll('.option').forEach(b=>b.setAttribute('aria-pressed','false'));[1,2].forEach(q=>{const f=document.getElementById('f'+q);f.hidden=true;f.textContent='';f.className='feedback'});celebration.innerHTML='';update();document.querySelector('#q1 .option').focus()});
-function tone(preview){try{const A=window.AudioContext||window.webkitAudioContext,c=new A(),now=c.currentTime,notes=preview?[523.25]:[523.25,659.25,783.99];notes.forEach((freq,i)=>{const o=c.createOscillator(),g=c.createGain();o.frequency.value=freq;g.gain.setValueAtTime(.0001,now+i*.12);g.gain.exponentialRampToValueAtTime(.12,now+i*.12+.01);g.gain.exponentialRampToValueAtTime(.0001,now+i*.12+.18);o.connect(g).connect(c.destination);o.start(now+i*.12);o.stop(now+i*.12+.2)})}catch(e){}}
-function confetti(){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;const colors=['#12355b','#0b568f','#f2c14e','#176b46','#8c2f39'];celebration.innerHTML='';for(let i=0;i<55;i++){const p=document.createElement('span');p.className='confetti';p.style.left=Math.random()*100+'vw';p.style.background=colors[Math.floor(Math.random()*colors.length)];p.style.animationDelay=Math.random()*.35+'s';p.style.animationDuration=1.4+Math.random()*.9+'s';celebration.appendChild(p)}setTimeout(()=>celebration.innerHTML='',2600)}
-update();
+(function () {
+
+    const answers = {
+        1: null,
+        2: null
+    };
+
+    let celebrated = false;
+
+    const status =
+        document.getElementById('status');
+
+    const reset =
+        document.getElementById('reset');
+
+    const celebration =
+        document.getElementById('celebration');
+
+    const feedback = {
+
+        1: {
+            good:
+                '<strong>Correct.</strong> Minimum qualifications and job-related evidence guide the screening decision. Prestige does not replace a missing minimum qualification.',
+            bad:
+                '<strong>Not quite.</strong> Use the posted qualifications and the evidence in the submitted application materials.'
+        },
+
+        2: {
+            good:
+                '<strong>Correct.</strong> Institutional reputation is not a substitute for evaluating the individual candidate.',
+            bad:
+                '<strong>Not quite.</strong> Return to the agreed criteria rather than relying on reputation or outside information.'
+        }
+    };
+
+    function updateStatus() {
+
+        const complete =
+            answers[1] !== null &&
+            answers[2] !== null;
+
+        const allCorrect =
+            answers[1] === true &&
+            answers[2] === true;
+
+        if (allCorrect) {
+
+            status.innerHTML =
+                '<strong>Both answers are correct.</strong> You applied the same job-related standard to both situations.';
+
+            if (!celebrated) {
+
+                celebrated = true;
+
+                launchConfetti();
+
+                playSuccessChime();
+            }
+
+        } else if (complete) {
+
+            status.innerHTML =
+                '<strong>One or more answers needs another look.</strong> Review the feedback and try again.';
+
+        } else {
+
+            status.innerHTML =
+                '<strong>Complete both questions.</strong> You may revise an answer after reading the feedback.';
+        }
+    }
+
+    document
+        .querySelectorAll('.option')
+        .forEach(function (button) {
+
+            button.addEventListener('click', function () {
+
+                const question =
+                    Number(button.dataset.q);
+
+                const correct =
+                    button.dataset.correct === 'true';
+
+                answers[question] =
+                    correct;
+
+                document
+                    .querySelectorAll(
+                        '[data-q="' +
+                        question +
+                        '"]'
+                    )
+                    .forEach(function (choice) {
+
+                        choice.setAttribute(
+                            'aria-pressed',
+                            choice === button
+                                ? 'true'
+                                : 'false'
+                        );
+
+                    });
+
+                const response =
+                    document.getElementById(
+                        'f' + question
+                    );
+
+                response.hidden =
+                    false;
+
+                response.className =
+                    'feedback ' +
+                    (correct
+                        ? 'good'
+                        : 'bad');
+
+                response.innerHTML =
+                    correct
+                        ? feedback[question].good
+                        : feedback[question].bad;
+
+                if (correct) {
+                    playCorrectSound();
+                } else {
+                    playIncorrectSound();
+                }
+
+                updateStatus();
+
+            });
+
+        });
+
+    reset.addEventListener(
+        'click',
+        function () {
+
+            answers[1] = null;
+            answers[2] = null;
+
+            celebrated = false;
+
+            document
+                .querySelectorAll('.option')
+                .forEach(function (button) {
+
+                    button.setAttribute(
+                        'aria-pressed',
+                        'false'
+                    );
+
+                });
+
+            [1, 2].forEach(
+                function (question) {
+
+                    const response =
+                        document.getElementById(
+                            'f' + question
+                        );
+
+                    response.hidden =
+                        true;
+
+                    response.textContent =
+                        '';
+
+                    response.className =
+                        'feedback';
+
+                }
+            );
+
+            celebration.innerHTML =
+                '';
+
+            updateStatus();
+
+            document
+                .querySelector('#q1 .option')
+                .focus();
+
+        }
+    );
+
+    function createAudioContext() {
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        return new AudioContext();
+    }
+
+    function playCorrectSound() {
+
+        try {
+
+            const context =
+                createAudioContext();
+
+            const now =
+                context.currentTime;
+
+            const oscillator =
+                context.createOscillator();
+
+            const gain =
+                context.createGain();
+
+            oscillator.type =
+                'sine';
+
+            oscillator.frequency.value =
+                660;
+
+            gain.gain.setValueAtTime(
+                .0001,
+                now
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .09,
+                now + .01
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .0001,
+                now + .16
+            );
+
+            oscillator
+                .connect(gain)
+                .connect(context.destination);
+
+            oscillator.start(now);
+
+            oscillator.stop(
+                now + .18
+            );
+
+        } catch (error) {
+        }
+    }
+
+    function playIncorrectSound() {
+
+        try {
+
+            const context =
+                createAudioContext();
+
+            const now =
+                context.currentTime;
+
+            const oscillator =
+                context.createOscillator();
+
+            const gain =
+                context.createGain();
+
+            oscillator.type =
+                'triangle';
+
+            oscillator.frequency.value =
+                220;
+
+            gain.gain.setValueAtTime(
+                .0001,
+                now
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .06,
+                now + .01
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .0001,
+                now + .18
+            );
+
+            oscillator
+                .connect(gain)
+                .connect(context.destination);
+
+            oscillator.start(now);
+
+            oscillator.stop(
+                now + .2
+            );
+
+        } catch (error) {
+        }
+    }
+
+    function playSuccessChime() {
+
+        try {
+
+            const context =
+                createAudioContext();
+
+            const now =
+                context.currentTime;
+
+            const notes = [
+                523.25,
+                659.25,
+                783.99
+            ];
+
+            notes.forEach(
+                function (frequency, index) {
+
+                    const oscillator =
+                        context.createOscillator();
+
+                    const gain =
+                        context.createGain();
+
+                    oscillator.type =
+                        'sine';
+
+                    oscillator.frequency.value =
+                        frequency;
+
+                    const start =
+                        now + index * .12;
+
+                    gain.gain.setValueAtTime(
+                        .0001,
+                        start
+                    );
+
+                    gain.gain.exponentialRampToValueAtTime(
+                        .11,
+                        start + .01
+                    );
+
+                    gain.gain.exponentialRampToValueAtTime(
+                        .0001,
+                        start + .2
+                    );
+
+                    oscillator
+                        .connect(gain)
+                        .connect(context.destination);
+
+                    oscillator.start(start);
+
+                    oscillator.stop(
+                        start + .22
+                    );
+
+                }
+            );
+
+        } catch (error) {
+        }
+    }
+
+    function launchConfetti() {
+
+        if (
+            window
+                .matchMedia(
+                    '(prefers-reduced-motion: reduce)'
+                )
+                .matches
+        ) {
+            return;
+        }
+
+        const colors = [
+            '#12355b',
+            '#0b568f',
+            '#f2c14e',
+            '#176b46',
+            '#8c2f39'
+        ];
+
+        celebration.innerHTML =
+            '';
+
+        for (
+            let i = 0;
+            i < 55;
+            i++
+        ) {
+
+            const piece =
+                document.createElement(
+                    'span'
+                );
+
+            piece.className =
+                'confetti';
+
+            piece.style.left =
+                Math.random() *
+                100 +
+                'vw';
+
+            piece.style.background =
+                colors[
+                    Math.floor(
+                        Math.random() *
+                        colors.length
+                    )
+                ];
+
+            piece.style.animationDelay =
+                Math.random() *
+                .35 +
+                's';
+
+            piece.style.animationDuration =
+                1.4 +
+                Math.random() *
+                .9 +
+                's';
+
+            celebration.appendChild(
+                piece
+            );
+        }
+
+        setTimeout(
+            function () {
+                celebration.innerHTML =
+                    '';
+            },
+            2600
+        );
+    }
+
+    updateStatus();
+
 })();
 </script>
+
 </body>
 </html>
