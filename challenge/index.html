@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Search Committee Challenge</title>
+
+<style>
+:root {
+    --navy: #12355b;
+    --blue: #0b568f;
+    --gold: #f2c14e;
+    --text: #1f2933;
+    --muted: #4b5b68;
+    --pale: #f3f7fa;
+    --line: #c8d2dc;
+    --success: #176b46;
+    --danger: #8c2f39;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: var(--white);
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+.wrap {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.activity {
+    border: 0;
+    background: var(--white);
+}
+
+.head {
+    padding: 20px 22px;
+    background: var(--navy);
+    color: var(--white);
+    border-left: 7px solid var(--gold);
+}
+
+.eyebrow {
+    margin: 0 0 4px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .05em;
+}
+
+h1 {
+    margin: 0;
+    color: var(--white);
+    font-size: 24px;
+    line-height: 1.25;
+}
+
+.intro {
+    margin: 0;
+    padding: 18px 22px 4px;
+}
+
+.progress-wrap {
+    margin: 16px 22px 0;
+}
+
+.progress-label {
+    margin: 0 0 6px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.progress-track {
+    height: 8px;
+    overflow: hidden;
+    background: #e4e9ed;
+    border-radius: 20px;
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+    background: var(--blue);
+    transition: width .25s ease;
+}
+
+.question {
+    margin: 18px 22px 0;
+    padding: 22px 0 0;
+    border-top: 1px solid var(--line);
+}
+
+.qnum {
+    margin: 0 0 4px;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .04em;
+}
+
+h2 {
+    margin: 0 0 10px;
+    color: var(--navy);
+    font-size: 20px;
+    line-height: 1.35;
+}
+
+.case {
+    margin: 0 0 14px;
+    padding: 14px 16px;
+    background: var(--pale);
+    border-left: 5px solid var(--navy);
+}
+
+.options {
+    display: grid;
+    gap: 10px;
+}
+
+.option,
+.smallbtn {
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid var(--navy);
+    border-radius: 5px;
+    background: var(--white);
+    color: var(--navy);
+}
+
+.option {
+    width: 100%;
+    padding: 13px 15px;
+    text-align: left;
+}
+
+.smallbtn {
+    padding: 9px 12px;
+}
+
+.option:hover,
+.option:focus-visible,
+.smallbtn:hover,
+.smallbtn:focus-visible {
+    background: var(--pale);
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+}
+
+.option[aria-pressed="true"] {
+    background: var(--navy);
+    color: var(--white);
+}
+
+.feedback {
+    margin: 12px 0 0;
+    padding: 12px 14px;
+    background: var(--pale);
+    border-left: 5px solid var(--navy);
+}
+
+.feedback.good {
+    border-left-color: var(--success);
+}
+
+.feedback.bad {
+    border-left-color: var(--danger);
+}
+
+.footer {
+    margin: 24px 22px 22px;
+    padding: 18px 20px;
+    background: var(--pale);
+    border-left: 6px solid var(--navy);
+}
+
+.controls {
+    margin-top: 14px;
+}
+
+.celebration {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.confetti {
+    position: absolute;
+    top: -20px;
+    width: 10px;
+    height: 18px;
+    opacity: .95;
+    animation: fall 2s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .confetti {
+        display: none !important;
+    }
+
+    .progress-bar {
+        transition: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .head,
+    .intro,
+    .footer {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .question,
+    .progress-wrap {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    h2 {
+        font-size: 19px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="wrap">
+
+<section class="activity" aria-labelledby="activity-title">
+
+<header class="head">
+    <p class="eyebrow">FINAL PRACTICE</p>
+    <h1 id="activity-title">Search Committee Challenge</h1>
+</header>
+
+<p class="intro">
+    Apply what you have learned across the search process. All four scenarios must be answered correctly to complete the challenge.
+</p>
+
+<div class="progress-wrap">
+    <p class="progress-label" id="progressText">
+        0 of 4 scenarios correct
+    </p>
+
+    <div class="progress-track" aria-hidden="true">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+</div>
+
+<!-- QUESTION 1 -->
+<section class="question" id="q1">
+
+    <p class="qnum">SCENARIO 1 | CONFLICT OF INTEREST</p>
+
+    <h2>
+        You recognize an applicant as your sibling.
+    </h2>
+
+    <div class="case">
+        What should you do before continuing with the candidate review?
+    </div>
+
+    <div class="options" role="group" aria-label="Scenario 1 answer choices">
+
+        <button class="option"
+                type="button"
+                data-q="1"
+                data-correct="false"
+                aria-pressed="false">
+            Continue reviewing the applicant but avoid discussing the relationship.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="1"
+                data-correct="true"
+                aria-pressed="false">
+            Stop reviewing and report the conflict to the Search Chair and Human Resources.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="1"
+                data-correct="false"
+                aria-pressed="false">
+            Ask the applicant whether they are comfortable with you remaining on the committee.
+        </button>
+
+    </div>
+
+    <div class="feedback"
+         id="f1"
+         aria-live="polite"
+         hidden>
+    </div>
+
+</section>
+
+<!-- QUESTION 2 -->
+<section class="question" id="q2">
+
+    <p class="qnum">SCENARIO 2 | FAIR SCREENING</p>
+
+    <h2>
+        One candidate has prestige. The other meets the requirements.
+    </h2>
+
+    <div class="case">
+        Candidate A attended a well-known university but is missing one minimum qualification. Candidate B meets all minimum qualifications.
+    </div>
+
+    <div class="options" role="group" aria-label="Scenario 2 answer choices">
+
+        <button class="option"
+                type="button"
+                data-q="2"
+                data-correct="false"
+                aria-pressed="false">
+            Advance Candidate A because institutional reputation can compensate for one missing qualification.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="2"
+                data-correct="true"
+                aria-pressed="false">
+            Use the posted qualifications and submitted evidence to make the screening decision.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="2"
+                data-correct="false"
+                aria-pressed="false">
+            Research the university before deciding which candidate should advance.
+        </button>
+
+    </div>
+
+    <div class="feedback"
+         id="f2"
+         aria-live="polite"
+         hidden>
+    </div>
+
+</section>
+
+<!-- QUESTION 3 -->
+<section class="question" id="q3">
+
+    <p class="qnum">SCENARIO 3 | SEARCH NOTES</p>
+
+    <h2>
+        A candidate volunteers personal information.
+    </h2>
+
+    <div class="case">
+        During a scheduling discussion, the candidate says, "I have three small children, so mornings are hard."
+    </div>
+
+    <div class="options" role="group" aria-label="Scenario 3 answer choices">
+
+        <button class="option"
+                type="button"
+                data-q="3"
+                data-correct="false"
+                aria-pressed="false">
+            Write down that the candidate has three young children because it may affect scheduling.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="3"
+                data-correct="true"
+                aria-pressed="false">
+            Document only whether the candidate can meet the required work schedule.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="3"
+                data-correct="false"
+                aria-pressed="false">
+            Note that family responsibilities may make the candidate less reliable.
+        </button>
+
+    </div>
+
+    <div class="feedback"
+         id="f3"
+         aria-live="polite"
+         hidden>
+    </div>
+
+</section>
+
+<!-- QUESTION 4 -->
+<section class="question" id="q4">
+
+    <p class="qnum">SCENARIO 4 | FINAL RECOMMENDATION</p>
+
+    <h2>
+        Which hiring rationale could you defend?
+    </h2>
+
+    <div class="case">
+        The committee is preparing its final recommendation for Jordan.
+    </div>
+
+    <div class="options" role="group" aria-label="Scenario 4 answer choices">
+
+        <button class="option"
+                type="button"
+                data-q="4"
+                data-correct="false"
+                aria-pressed="false">
+            We liked Jordan best and believe Jordan will fit in well with the department.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="4"
+                data-correct="true"
+                aria-pressed="false">
+            Jordan meets the posted qualifications, and the interview and reference evidence demonstrates experience directly connected to the position's needs.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="4"
+                data-correct="false"
+                aria-pressed="false">
+            Jordan seemed more confident than the other finalists, so the committee prefers Jordan.
+        </button>
+
+    </div>
+
+    <div class="feedback"
+         id="f4"
+         aria-live="polite"
+         hidden>
+    </div>
+
+</section>
+
+<div class="footer">
+
+    <p id="status" style="margin: 0;">
+        <strong>Complete all four scenarios.</strong>
+        You may revise an answer after reading the feedback.
+    </p>
+
+    <div class="controls">
+        <button class="smallbtn"
+                id="reset"
+                type="button">
+            Reset challenge
+        </button>
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+<div class="celebration"
+     id="celebration"
+     aria-hidden="true">
+</div>
+
+<script>
+(function () {
+
+    const answers = {
+        1: null,
+        2: null,
+        3: null,
+        4: null
+    };
+
+    let celebrated = false;
+
+    const status =
+        document.getElementById('status');
+
+    const reset =
+        document.getElementById('reset');
+
+    const celebration =
+        document.getElementById('celebration');
+
+    const progressText =
+        document.getElementById('progressText');
+
+    const progressBar =
+        document.getElementById('progressBar');
+
+    const feedback = {
+
+        1: {
+            good:
+                "<strong>Correct.</strong> A family or partner relationship with an applicant requires you to stop evaluating and report the conflict to the Search Chair and Human Resources.",
+            bad:
+                "<strong>Not quite.</strong> Do not continue evaluating the applicant. Stop and report the conflict before proceeding."
+        },
+
+        2: {
+            good:
+                "<strong>Correct.</strong> Institutional reputation does not replace a missing minimum qualification. Apply the posted criteria and submitted evidence consistently.",
+            bad:
+                "<strong>Not quite.</strong> Use the posted qualifications and the individual candidate's submitted evidence rather than prestige."
+        },
+
+        3: {
+            good:
+                "<strong>Correct.</strong> Do not record information about the candidate's children. Document only job-related information, such as whether the candidate can meet the required schedule.",
+            bad:
+                "<strong>Not quite.</strong> Personal family information does not belong in the search notes. Return to the actual job requirement."
+        },
+
+        4: {
+            good:
+                "<strong>Correct.</strong> A defensible rationale connects the finalist's qualifications and documented search evidence directly to the requirements of the position.",
+            bad:
+                "<strong>Not quite.</strong> Preference, confidence, and general impressions do not replace an evidence-based hiring rationale."
+        }
+
+    };
+
+    function correctCount() {
+
+        return Object.values(answers)
+            .filter(function (value) {
+                return value === true;
+            })
+            .length;
+    }
+
+    function updateProgress() {
+
+        const count =
+            correctCount();
+
+        progressText.textContent =
+            count + " of 4 scenarios correct";
+
+        progressBar.style.width =
+            (count / 4 * 100) + "%";
+    }
+
+    function updateStatus() {
+
+        const complete =
+            Object.values(answers)
+                .every(function (value) {
+                    return value !== null;
+                });
+
+        const allCorrect =
+            correctCount() === 4;
+
+        updateProgress();
+
+        if (allCorrect) {
+
+            status.innerHTML =
+                "<strong>Challenge complete.</strong> You applied the key principles across confidentiality, screening, documentation, and the final recommendation.";
+
+            if (!celebrated) {
+
+                celebrated = true;
+
+                launchConfetti();
+
+                playFinalChime();
+            }
+
+        } else if (complete) {
+
+            status.innerHTML =
+                "<strong>One or more scenarios needs another look.</strong> Review the feedback and revise your answers.";
+
+        } else {
+
+            status.innerHTML =
+                "<strong>Complete all four scenarios.</strong> You may revise an answer after reading the feedback.";
+        }
+    }
+
+    document
+        .querySelectorAll('.option')
+        .forEach(function (button) {
+
+            button.addEventListener('click', function () {
+
+                const question =
+                    Number(button.dataset.q);
+
+                const correct =
+                    button.dataset.correct === 'true';
+
+                answers[question] =
+                    correct;
+
+                document
+                    .querySelectorAll(
+                        '[data-q="' +
+                        question +
+                        '"]'
+                    )
+                    .forEach(function (choice) {
+
+                        choice.setAttribute(
+                            'aria-pressed',
+                            choice === button
+                                ? 'true'
+                                : 'false'
+                        );
+
+                    });
+
+                const response =
+                    document.getElementById(
+                        'f' + question
+                    );
+
+                response.hidden =
+                    false;
+
+                response.className =
+                    'feedback ' +
+                    (correct
+                        ? 'good'
+                        : 'bad');
+
+                response.innerHTML =
+                    correct
+                        ? feedback[question].good
+                        : feedback[question].bad;
+
+                if (correct) {
+                    playCorrectSound();
+                } else {
+                    playIncorrectSound();
+                }
+
+                updateStatus();
+
+            });
+
+        });
+
+    reset.addEventListener('click', function () {
+
+        Object.keys(answers)
+            .forEach(function (key) {
+                answers[key] = null;
+            });
+
+        celebrated = false;
+
+        document
+            .querySelectorAll('.option')
+            .forEach(function (button) {
+
+                button.setAttribute(
+                    'aria-pressed',
+                    'false'
+                );
+
+            });
+
+        [1, 2, 3, 4]
+            .forEach(function (question) {
+
+                const response =
+                    document.getElementById(
+                        'f' + question
+                    );
+
+                response.hidden = true;
+
+                response.textContent = '';
+
+                response.className =
+                    'feedback';
+
+            });
+
+        celebration.innerHTML = '';
+
+        updateStatus();
+
+        document
+            .querySelector('#q1 .option')
+            .focus();
+
+    });
+
+    function createAudioContext() {
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        return new AudioContext();
+    }
+
+    function playCorrectSound() {
+
+        try {
+
+            const context =
+                createAudioContext();
+
+            const now =
+                context.currentTime;
+
+            const oscillator =
+                context.createOscillator();
+
+            const gain =
+                context.createGain();
+
+            oscillator.type =
+                'sine';
+
+            oscillator.frequency.value =
+                660;
+
+            gain.gain.setValueAtTime(
+                .0001,
+                now
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .09,
+                now + .01
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .0001,
+                now + .16
+            );
+
+            oscillator
+                .connect(gain)
+                .connect(context.destination);
+
+            oscillator.start(now);
+
+            oscillator.stop(
+                now + .18
+            );
+
+        } catch (error) {
+        }
+    }
+
+    function playIncorrectSound() {
+
+        try {
+
+            const context =
+                createAudioContext();
+
+            const now =
+                context.currentTime;
+
+            const oscillator =
+                context.createOscillator();
+
+            const gain =
+                context.createGain();
+
+            oscillator.type =
+                'triangle';
+
+            oscillator.frequency.value =
+                220;
+
+            gain.gain.setValueAtTime(
+                .0001,
+                now
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .06,
+                now + .01
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .0001,
+                now + .18
+            );
+
+            oscillator
+                .connect(gain)
+                .connect(context.destination);
+
+            oscillator.start(now);
+
+            oscillator.stop(
+                now + .2
+            );
+
+        } catch (error) {
+        }
+    }
+
+    function playFinalChime() {
+
+        try {
+
+            const context =
+                createAudioContext();
+
+            const now =
+                context.currentTime;
+
+            const notes = [
+                523.25,
+                659.25,
+                783.99,
+                1046.50
+            ];
+
+            notes.forEach(function (frequency, index) {
+
+                const oscillator =
+                    context.createOscillator();
+
+                const gain =
+                    context.createGain();
+
+                oscillator.type =
+                    'sine';
+
+                oscillator.frequency.value =
+                    frequency;
+
+                const start =
+                    now + index * .12;
+
+                gain.gain.setValueAtTime(
+                    .0001,
+                    start
+                );
+
+                gain.gain.exponentialRampToValueAtTime(
+                    .12,
+                    start + .01
+                );
+
+                gain.gain.exponentialRampToValueAtTime(
+                    .0001,
+                    start + .24
+                );
+
+                oscillator
+                    .connect(gain)
+                    .connect(context.destination);
+
+                oscillator.start(start);
+
+                oscillator.stop(
+                    start + .26
+                );
+
+            });
+
+        } catch (error) {
+        }
+    }
+
+    function launchConfetti() {
+
+        if (
+            window
+                .matchMedia(
+                    '(prefers-reduced-motion: reduce)'
+                )
+                .matches
+        ) {
+            return;
+        }
+
+        const colors = [
+            '#12355b',
+            '#0b568f',
+            '#f2c14e',
+            '#176b46',
+            '#8c2f39'
+        ];
+
+        celebration.innerHTML = '';
+
+        for (let i = 0; i < 85; i++) {
+
+            const piece =
+                document.createElement('span');
+
+            piece.className =
+                'confetti';
+
+            piece.style.left =
+                Math.random() * 100 + 'vw';
+
+            piece.style.background =
+                colors[
+                    Math.floor(
+                        Math.random() *
+                        colors.length
+                    )
+                ];
+
+            piece.style.animationDelay =
+                Math.random() * .45 + 's';
+
+            piece.style.animationDuration =
+                1.6 +
+                Math.random() * 1.1 +
+                's';
+
+            celebration.appendChild(piece);
+        }
+
+        setTimeout(function () {
+            celebration.innerHTML = '';
+        }, 3200);
+    }
+
+    updateStatus();
+
+})();
+</script>
+
+</body>
+</html>
