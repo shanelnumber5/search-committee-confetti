@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Bias & Consistent Evaluation Check</title>
+<title>Bias &amp; Consistent Evaluation Check</title>
 
 <style>
 :root {
@@ -61,6 +61,7 @@ body {
 
 h1 {
     margin: 0;
+    color: var(--white);
     font-size: 24px;
     line-height: 1.25;
 }
@@ -81,6 +82,7 @@ h1 {
     color: var(--blue);
     font-size: 13px;
     font-weight: 700;
+    letter-spacing: .05em;
 }
 
 h2 {
@@ -254,21 +256,24 @@ h2 {
 
     <div class="options" role="group" aria-label="Question 1 answer choices">
 
-        <button class="option" type="button"
+        <button class="option"
+                type="button"
                 data-q="1"
                 data-correct="false"
                 aria-pressed="false">
             Give the candidate additional credit because the university has a strong reputation.
         </button>
 
-        <button class="option" type="button"
+        <button class="option"
+                type="button"
                 data-q="1"
                 data-correct="true"
                 aria-pressed="false">
             Return to the agreed criteria and evaluate the candidate using submitted evidence.
         </button>
 
-        <button class="option" type="button"
+        <button class="option"
+                type="button"
                 data-q="1"
                 data-correct="false"
                 aria-pressed="false">
@@ -277,7 +282,11 @@ h2 {
 
     </div>
 
-    <div class="feedback" id="f1" aria-live="polite" hidden></div>
+    <div class="feedback"
+         id="f1"
+         aria-live="polite"
+         hidden>
+    </div>
 
 </section>
 
@@ -295,21 +304,24 @@ h2 {
 
     <div class="options" role="group" aria-label="Question 2 answer choices">
 
-        <button class="option" type="button"
+        <button class="option"
+                type="button"
                 data-q="2"
                 data-correct="false"
                 aria-pressed="false">
             Trust the committee member's professional instinct.
         </button>
 
-        <button class="option" type="button"
+        <button class="option"
+                type="button"
                 data-q="2"
                 data-correct="true"
                 aria-pressed="false">
             Ask the committee member to connect the impression to specific job-related evidence.
         </button>
 
-        <button class="option" type="button"
+        <button class="option"
+                type="button"
                 data-q="2"
                 data-correct="false"
                 aria-pressed="false">
@@ -318,7 +330,11 @@ h2 {
 
     </div>
 
-    <div class="feedback" id="f2" aria-live="polite" hidden></div>
+    <div class="feedback"
+         id="f2"
+         aria-live="polite"
+         hidden>
+    </div>
 
 </section>
 
@@ -330,12 +346,12 @@ h2 {
     </p>
 
     <div class="controls">
-    <button class="smallbtn"
-            id="reset"
-            type="button">
-        Reset activity
-    </button>
-</div>
+        <button class="smallbtn"
+                id="reset"
+                type="button">
+            Reset activity
+        </button>
+    </div>
 
 </div>
 
@@ -344,7 +360,8 @@ h2 {
 
 <div class="celebration"
      id="celebration"
-     aria-hidden="true"></div>
+     aria-hidden="true">
+</div>
 
 <script>
 (function () {
@@ -356,23 +373,28 @@ h2 {
 
     let celebrated = false;
 
-    const status = document.getElementById('status');
-    const reset = document.getElementById('reset');
-    const celebration = document.getElementById('celebration');
+    const status =
+        document.getElementById('status');
+
+    const reset =
+        document.getElementById('reset');
+
+    const celebration =
+        document.getElementById('celebration');
 
     const feedback = {
         1: {
             good:
-                '<strong>Correct.</strong> Institutional reputation is not a substitute for evaluating the individual candidate. Return to the agreed criteria and submitted evidence.',
+                "<strong>Correct.</strong> Institutional reputation is not a substitute for evaluating the individual candidate. Return to the agreed criteria and submitted evidence.",
             bad:
-                '<strong>Not quite.</strong> Use the position requirements and the candidate\\'s submitted evidence rather than institutional reputation.'
+                "<strong>Not quite.</strong> Use the position requirements and the candidate's submitted evidence rather than institutional reputation."
         },
 
         2: {
             good:
-                '<strong>Correct.</strong> Impressions should be translated into specific job-related evidence before they influence the evaluation.',
+                "<strong>Correct.</strong> Impressions should be translated into specific job-related evidence before they influence the evaluation.",
             bad:
-                '<strong>Not quite.</strong> A feeling or impression should not drive the evaluation unless it can be connected to specific job-related evidence.'
+                "<strong>Not quite.</strong> A feeling or impression should not drive the evaluation unless it can be connected to specific job-related evidence."
         }
     };
 
@@ -389,164 +411,316 @@ h2 {
         if (allCorrect) {
 
             status.innerHTML =
-                '<strong>Both answers are correct.</strong> You identified two common ways bias can enter the evaluation process.';
+                "<strong>Both answers are correct.</strong> You identified two common ways bias can enter the evaluation process.";
 
-           if (!celebrated) {
-              celebrated = true;
-              launchConfetti();
-              playTone(false);
-          }
+            if (!celebrated) {
+
+                celebrated = true;
+
+                launchConfetti();
+
+                playSuccessChime();
+            }
 
         } else if (complete) {
 
             status.innerHTML =
-                '<strong>One or more answers needs another look.</strong> Review the feedback and try again.';
+                "<strong>One or more answers needs another look.</strong> Review the feedback and try again.";
 
         } else {
 
             status.innerHTML =
-                '<strong>Complete both questions.</strong> You may revise an answer after reading the feedback.';
+                "<strong>Complete both questions.</strong> You may revise an answer after reading the feedback.";
         }
     }
 
-    document.querySelectorAll('.option').forEach(function (button) {
+    document
+        .querySelectorAll('.option')
+        .forEach(function (button) {
 
-        button.addEventListener('click', function () {
+            button.addEventListener('click', function () {
 
-            const question =
-                Number(button.dataset.q);
+                const question =
+                    Number(button.dataset.q);
 
-            const correct =
-                button.dataset.correct === 'true';
+                const correct =
+                    button.dataset.correct === 'true';
 
-            answers[question] = correct;
+                answers[question] =
+                    correct;
+
+                document
+                    .querySelectorAll(
+                        '[data-q="' +
+                        question +
+                        '"]'
+                    )
+                    .forEach(function (choice) {
+
+                        choice.setAttribute(
+                            'aria-pressed',
+                            choice === button
+                                ? 'true'
+                                : 'false'
+                        );
+
+                    });
+
+                const response =
+                    document.getElementById(
+                        'f' + question
+                    );
+
+                response.hidden =
+                    false;
+
+                response.className =
+                    'feedback ' +
+                    (correct
+                        ? 'good'
+                        : 'bad');
+
+                response.innerHTML =
+                    correct
+                        ? feedback[question].good
+                        : feedback[question].bad;
+
+                if (correct) {
+                    playCorrectSound();
+                } else {
+                    playIncorrectSound();
+                }
+
+                updateStatus();
+
+            });
+
+        });
+
+    reset.addEventListener(
+        'click',
+        function () {
+
+            answers[1] = null;
+            answers[2] = null;
+
+            celebrated = false;
 
             document
-                .querySelectorAll('[data-q="' + question + '"]')
-                .forEach(function (choice) {
+                .querySelectorAll('.option')
+                .forEach(function (button) {
 
-                    choice.setAttribute(
+                    button.setAttribute(
                         'aria-pressed',
-                        choice === button ? 'true' : 'false'
+                        'false'
                     );
 
                 });
 
-            const response =
-                document.getElementById('f' + question);
+            [1, 2].forEach(
+                function (question) {
 
-            response.hidden = false;
+                    const response =
+                        document.getElementById(
+                            'f' + question
+                        );
 
-            response.className =
-                'feedback ' +
-                (correct ? 'good' : 'bad');
+                    response.hidden =
+                        true;
 
-            response.innerHTML =
-                correct
-                    ? feedback[question].good
-                    : feedback[question].bad;
+                    response.textContent =
+                        '';
+
+                    response.className =
+                        'feedback';
+
+                }
+            );
+
+            celebration.innerHTML =
+                '';
 
             updateStatus();
-        });
 
-    });
+            document
+                .querySelector('#q1 .option')
+                .focus();
 
-    reset.addEventListener('click', function () {
+        }
+    );
 
-        answers[1] = null;
-        answers[2] = null;
-        celebrated = false;
+    function createAudioContext() {
 
-        document
-            .querySelectorAll('.option')
-            .forEach(function (button) {
-                button.setAttribute(
-                    'aria-pressed',
-                    'false'
-                );
-            });
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
 
-        [1, 2].forEach(function (question) {
+        return new AudioContext();
+    }
 
-            const response =
-                document.getElementById(
-                    'f' + question
-                );
-
-            response.hidden = true;
-            response.textContent = '';
-            response.className = 'feedback';
-
-        });
-
-        celebration.innerHTML = '';
-
-        updateStatus();
-
-        document
-            .querySelector('#q1 .option')
-            .focus();
-
-    });
-
-    function playTone(preview) {
+    function playCorrectSound() {
 
         try {
 
-            const AudioContext =
-                window.AudioContext ||
-                window.webkitAudioContext;
-
             const context =
-                new AudioContext();
+                createAudioContext();
 
             const now =
                 context.currentTime;
 
-            const notes =
-                preview
-                    ? [523.25]
-                    : [523.25, 659.25, 783.99];
+            const oscillator =
+                context.createOscillator();
 
-            notes.forEach(function (frequency, index) {
+            const gain =
+                context.createGain();
 
-                const oscillator =
-                    context.createOscillator();
+            oscillator.type =
+                'sine';
 
-                const gain =
-                    context.createGain();
+            oscillator.frequency.value =
+                660;
 
-                oscillator.frequency.value =
-                    frequency;
+            gain.gain.setValueAtTime(
+                .0001,
+                now
+            );
 
-                gain.gain.setValueAtTime(
-                    .0001,
-                    now + index * .12
-                );
+            gain.gain.exponentialRampToValueAtTime(
+                .09,
+                now + .01
+            );
 
-                gain.gain.exponentialRampToValueAtTime(
-                    .12,
-                    now + index * .12 + .01
-                );
+            gain.gain.exponentialRampToValueAtTime(
+                .0001,
+                now + .16
+            );
 
-                gain.gain.exponentialRampToValueAtTime(
-                    .0001,
-                    now + index * .12 + .18
-                );
+            oscillator
+                .connect(gain)
+                .connect(context.destination);
 
-                oscillator
-                    .connect(gain)
-                    .connect(context.destination);
+            oscillator.start(now);
 
-                oscillator.start(
-                    now + index * .12
-                );
+            oscillator.stop(
+                now + .18
+            );
 
-                oscillator.stop(
-                    now + index * .12 + .2
-                );
+        } catch (error) {
+        }
+    }
 
-            });
+    function playIncorrectSound() {
+
+        try {
+
+            const context =
+                createAudioContext();
+
+            const now =
+                context.currentTime;
+
+            const oscillator =
+                context.createOscillator();
+
+            const gain =
+                context.createGain();
+
+            oscillator.type =
+                'triangle';
+
+            oscillator.frequency.value =
+                220;
+
+            gain.gain.setValueAtTime(
+                .0001,
+                now
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .06,
+                now + .01
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .0001,
+                now + .18
+            );
+
+            oscillator
+                .connect(gain)
+                .connect(context.destination);
+
+            oscillator.start(now);
+
+            oscillator.stop(
+                now + .2
+            );
+
+        } catch (error) {
+        }
+    }
+
+    function playSuccessChime() {
+
+        try {
+
+            const context =
+                createAudioContext();
+
+            const now =
+                context.currentTime;
+
+            const notes = [
+                523.25,
+                659.25,
+                783.99
+            ];
+
+            notes.forEach(
+                function (frequency, index) {
+
+                    const oscillator =
+                        context.createOscillator();
+
+                    const gain =
+                        context.createGain();
+
+                    oscillator.type =
+                        'sine';
+
+                    oscillator.frequency.value =
+                        frequency;
+
+                    const start =
+                        now + index * .12;
+
+                    gain.gain.setValueAtTime(
+                        .0001,
+                        start
+                    );
+
+                    gain.gain.exponentialRampToValueAtTime(
+                        .11,
+                        start + .01
+                    );
+
+                    gain.gain.exponentialRampToValueAtTime(
+                        .0001,
+                        start + .2
+                    );
+
+                    oscillator
+                        .connect(gain)
+                        .connect(context.destination);
+
+                    oscillator.start(start);
+
+                    oscillator.stop(
+                        start + .22
+                    );
+
+                }
+            );
 
         } catch (error) {
         }
@@ -572,18 +746,27 @@ h2 {
             '#8c2f39'
         ];
 
-        celebration.innerHTML = '';
+        celebration.innerHTML =
+            '';
 
-        for (let i = 0; i < 55; i++) {
+        for (
+            let i = 0;
+            i < 55;
+            i++
+        ) {
 
             const piece =
-                document.createElement('span');
+                document.createElement(
+                    'span'
+                );
 
             piece.className =
                 'confetti';
 
             piece.style.left =
-                Math.random() * 100 + 'vw';
+                Math.random() *
+                100 +
+                'vw';
 
             piece.style.background =
                 colors[
@@ -594,19 +777,28 @@ h2 {
                 ];
 
             piece.style.animationDelay =
-                Math.random() * .35 + 's';
+                Math.random() *
+                .35 +
+                's';
 
             piece.style.animationDuration =
                 1.4 +
-                Math.random() * .9 +
+                Math.random() *
+                .9 +
                 's';
 
-            celebration.appendChild(piece);
+            celebration.appendChild(
+                piece
+            );
         }
 
-        setTimeout(function () {
-            celebration.innerHTML = '';
-        }, 2600);
+        setTimeout(
+            function () {
+                celebration.innerHTML =
+                    '';
+            },
+            2600
+        );
     }
 
     updateStatus();
