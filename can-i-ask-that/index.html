@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Job-Related Interview Questions Check</title>
+
+<style>
+:root {
+    --navy: #12355b;
+    --blue: #0b568f;
+    --gold: #f2c14e;
+    --text: #1f2933;
+    --pale: #f3f7fa;
+    --line: #c8d2dc;
+    --success: #176b46;
+    --danger: #8c2f39;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: var(--white);
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+.wrap {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.activity {
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+    background: var(--white);
+}
+
+.head {
+    padding: 18px 22px;
+    background: var(--navy);
+    color: var(--white);
+    border-left: 7px solid var(--gold);
+}
+
+.eyebrow {
+    margin: 0 0 4px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .05em;
+}
+
+h1 {
+    margin: 0;
+    color: var(--white);
+    font-size: 24px;
+    line-height: 1.25;
+}
+
+.intro {
+    margin: 0;
+    padding: 18px 22px 6px;
+}
+
+.question {
+    margin: 12px 22px 0;
+    padding: 20px 0 0;
+    border-top: 1px solid var(--line);
+}
+
+.qnum {
+    margin: 0 0 4px;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .05em;
+}
+
+h2 {
+    margin: 0 0 10px;
+    color: var(--navy);
+    font-size: 20px;
+    line-height: 1.35;
+}
+
+.case {
+    margin: 0 0 14px;
+    padding: 14px 16px;
+    background: var(--pale);
+    border-left: 5px solid var(--navy);
+}
+
+.options {
+    display: grid;
+    gap: 10px;
+}
+
+.option,
+.smallbtn {
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid var(--navy);
+    border-radius: 5px;
+    background: var(--white);
+    color: var(--navy);
+}
+
+.option {
+    width: 100%;
+    padding: 13px 15px;
+    text-align: left;
+}
+
+.smallbtn {
+    padding: 9px 12px;
+}
+
+.option:hover,
+.option:focus-visible,
+.smallbtn:hover,
+.smallbtn:focus-visible {
+    background: var(--pale);
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+}
+
+.option[aria-pressed="true"] {
+    background: var(--navy);
+    color: var(--white);
+}
+
+.feedback {
+    margin: 12px 0 0;
+    padding: 12px 14px;
+    background: var(--pale);
+    border-left: 5px solid var(--navy);
+}
+
+.feedback.good {
+    border-left-color: var(--success);
+}
+
+.feedback.bad {
+    border-left-color: var(--danger);
+}
+
+.footer {
+    margin: 22px;
+    padding: 18px 20px;
+    background: var(--pale);
+    border-left: 6px solid var(--navy);
+}
+
+.controls {
+    margin-top: 14px;
+}
+
+.celebration {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.confetti {
+    position: absolute;
+    top: -20px;
+    width: 10px;
+    height: 18px;
+    opacity: .95;
+    animation: fall 1.8s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .confetti {
+        display: none !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .head,
+    .intro,
+    .footer {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .question {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    h2 {
+        font-size: 19px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="wrap">
+
+<section class="activity" aria-labelledby="activity-title">
+
+<header class="head">
+    <p class="eyebrow">CHECK YOUR UNDERSTANDING</p>
+    <h1 id="activity-title">Can I Ask That?</h1>
+</header>
+
+<p class="intro">
+    Choose the best response for both situations. Both answers must be correct to complete the activity.
+</p>
+
+<section class="question" id="q1">
+
+    <p class="qnum">QUESTION 1</p>
+
+    <h2>
+        A candidate mentions childcare difficulties while answering a scheduling question.
+    </h2>
+
+    <div class="case">
+        The committee wants to know whether the candidate can work occasional evenings.
+    </div>
+
+    <div class="options" role="group" aria-label="Question 1 answer choices">
+
+        <button class="option"
+                type="button"
+                data-q="1"
+                data-correct="false"
+                aria-pressed="false">
+            Ask who will watch the candidate's children during evening work.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="1"
+                data-correct="true"
+                aria-pressed="false">
+            Return to the job requirement and ask whether the candidate can work the required evening schedule.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="1"
+                data-correct="false"
+                aria-pressed="false">
+            Ask whether childcare problems have interfered with the candidate's previous employment.
+        </button>
+
+    </div>
+
+    <div class="feedback"
+         id="f1"
+         aria-live="polite"
+         hidden>
+    </div>
+
+</section>
+
+<section class="question" id="q2">
+
+    <p class="qnum">QUESTION 2</p>
+
+    <h2>
+        The position regularly requires evening work.
+    </h2>
+
+    <div class="case">
+        The committee wants to determine whether candidates can meet that schedule requirement.
+    </div>
+
+    <div class="options" role="group" aria-label="Question 2 answer choices">
+
+        <button class="option"
+                type="button"
+                data-q="2"
+                data-correct="true"
+                aria-pressed="false">
+            Ask each candidate whether they are able to work the required evening schedule.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="2"
+                data-correct="false"
+                aria-pressed="false">
+            Ask candidates whether family responsibilities might make evening work difficult.
+        </button>
+
+        <button class="option"
+                type="button"
+                data-q="2"
+                data-correct="false"
+                aria-pressed="false">
+            Avoid discussing the schedule because availability questions are always inappropriate.
+        </button>
+
+    </div>
+
+    <div class="feedback"
+         id="f2"
+         aria-live="polite"
+         hidden>
+    </div>
+
+</section>
+
+<div class="footer">
+
+    <p id="status" style="margin: 0;">
+        <strong>Complete both questions.</strong>
+        You may revise an answer after reading the feedback.
+    </p>
+
+    <div class="controls">
+        <button class="smallbtn"
+                id="reset"
+                type="button">
+            Reset activity
+        </button>
+    </div>
+
+</div>
+
+</section>
+</main>
+
+<div class="celebration"
+     id="celebration"
+     aria-hidden="true">
+</div>
+
+<script>
+(function () {
+
+    const answers = {
+        1: null,
+        2: null
+    };
+
+    let celebrated = false;
+
+    const status =
+        document.getElementById('status');
+
+    const reset =
+        document.getElementById('reset');
+
+    const celebration =
+        document.getElementById('celebration');
+
+    const feedback = {
+
+        1: {
+            good:
+                "<strong>Correct.</strong> Do not pursue information about children or childcare arrangements. Return to the actual schedule requirement.",
+            bad:
+                "<strong>Not quite.</strong> The candidate volunteering personal information does not make it appropriate to pursue. Keep the discussion focused on the required work schedule."
+        },
+
+        2: {
+            good:
+                "<strong>Correct.</strong> If evening work is an actual requirement of the position, the committee may ask whether the candidate can meet that schedule. Ask the question consistently.",
+            bad:
+                "<strong>Not quite.</strong> The committee may ask about an actual schedule requirement, but should not ask about family or personal circumstances."
+        }
+    };
+
+    function updateStatus() {
+
+        const complete =
+            answers[1] !== null &&
+            answers[2] !== null;
+
+        const allCorrect =
+            answers[1] === true &&
+            answers[2] === true;
+
+        if (allCorrect) {
+
+            status.innerHTML =
+                "<strong>Both answers are correct.</strong> You kept the discussion focused on the requirements of the position.";
+
+            if (!celebrated) {
+
+                celebrated = true;
+
+                launchConfetti();
+
+                playSuccessChime();
+            }
+
+        } else if (complete) {
+
+            status.innerHTML =
+                "<strong>One or more answers needs another look.</strong> Review the feedback and try again.";
+
+        } else {
+
+            status.innerHTML =
+                "<strong>Complete both questions.</strong> You may revise an answer after reading the feedback.";
+        }
+    }
+
+    document
+        .querySelectorAll('.option')
+        .forEach(function (button) {
+
+            button.addEventListener('click', function () {
+
+                const question =
+                    Number(button.dataset.q);
+
+                const correct =
+                    button.dataset.correct === 'true';
+
+                answers[question] =
+                    correct;
+
+                document
+                    .querySelectorAll(
+                        '[data-q="' +
+                        question +
+                        '"]'
+                    )
+                    .forEach(function (choice) {
+
+                        choice.setAttribute(
+                            'aria-pressed',
+                            choice === button
+                                ? 'true'
+                                : 'false'
+                        );
+
+                    });
+
+                const response =
+                    document.getElementById(
+                        'f' + question
+                    );
+
+                response.hidden =
+                    false;
+
+                response.className =
+                    'feedback ' +
+                    (correct
+                        ? 'good'
+                        : 'bad');
+
+                response.innerHTML =
+                    correct
+                        ? feedback[question].good
+                        : feedback[question].bad;
+
+                if (correct) {
+                    playCorrectSound();
+                } else {
+                    playIncorrectSound();
+                }
+
+                updateStatus();
+
+            });
+
+        });
+
+    reset.addEventListener(
+        'click',
+        function () {
+
+            answers[1] = null;
+            answers[2] = null;
+
+            celebrated = false;
+
+            document
+                .querySelectorAll('.option')
+                .forEach(function (button) {
+
+                    button.setAttribute(
+                        'aria-pressed',
+                        'false'
+                    );
+
+                });
+
+            [1, 2].forEach(function (question) {
+
+                const response =
+                    document.getElementById(
+                        'f' + question
+                    );
+
+                response.hidden =
+                    true;
+
+                response.textContent =
+                    '';
+
+                response.className =
+                    'feedback';
+
+            });
+
+            celebration.innerHTML =
+                '';
+
+            updateStatus();
+
+            document
+                .querySelector('#q1 .option')
+                .focus();
+
+        }
+    );
+
+    function createAudioContext() {
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        return new AudioContext();
+    }
+
+    function playCorrectSound() {
+
+        try {
+
+            const context =
+                createAudioContext();
+
+            const now =
+                context.currentTime;
+
+            const oscillator =
+                context.createOscillator();
+
+            const gain =
+                context.createGain();
+
+            oscillator.type =
+                'sine';
+
+            oscillator.frequency.value =
+                660;
+
+            gain.gain.setValueAtTime(
+                .0001,
+                now
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .09,
+                now + .01
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .0001,
+                now + .16
+            );
+
+            oscillator
+                .connect(gain)
+                .connect(context.destination);
+
+            oscillator.start(now);
+
+            oscillator.stop(
+                now + .18
+            );
+
+        } catch (error) {
+        }
+    }
+
+    function playIncorrectSound() {
+
+        try {
+
+            const context =
+                createAudioContext();
+
+            const now =
+                context.currentTime;
+
+            const oscillator =
+                context.createOscillator();
+
+            const gain =
+                context.createGain();
+
+            oscillator.type =
+                'triangle';
+
+            oscillator.frequency.value =
+                220;
+
+            gain.gain.setValueAtTime(
+                .0001,
+                now
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .06,
+                now + .01
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .0001,
+                now + .18
+            );
+
+            oscillator
+                .connect(gain)
+                .connect(context.destination);
+
+            oscillator.start(now);
+
+            oscillator.stop(
+                now + .2
+            );
+
+        } catch (error) {
+        }
+    }
+
+    function playSuccessChime() {
+
+        try {
+
+            const context =
+                createAudioContext();
+
+            const now =
+                context.currentTime;
+
+            const notes = [
+                523.25,
+                659.25,
+                783.99
+            ];
+
+            notes.forEach(function (frequency, index) {
+
+                const oscillator =
+                    context.createOscillator();
+
+                const gain =
+                    context.createGain();
+
+                oscillator.type =
+                    'sine';
+
+                oscillator.frequency.value =
+                    frequency;
+
+                const start =
+                    now + index * .12;
+
+                gain.gain.setValueAtTime(
+                    .0001,
+                    start
+                );
+
+                gain.gain.exponentialRampToValueAtTime(
+                    .11,
+                    start + .01
+                );
+
+                gain.gain.exponentialRampToValueAtTime(
+                    .0001,
+                    start + .2
+                );
+
+                oscillator
+                    .connect(gain)
+                    .connect(context.destination);
+
+                oscillator.start(start);
+
+                oscillator.stop(
+                    start + .22
+                );
+
+            });
+
+        } catch (error) {
+        }
+    }
+
+    function launchConfetti() {
+
+        if (
+            window
+                .matchMedia(
+                    '(prefers-reduced-motion: reduce)'
+                )
+                .matches
+        ) {
+            return;
+        }
+
+        const colors = [
+            '#12355b',
+            '#0b568f',
+            '#f2c14e',
+            '#176b46',
+            '#8c2f39'
+        ];
+
+        celebration.innerHTML =
+            '';
+
+        for (let i = 0; i < 55; i++) {
+
+            const piece =
+                document.createElement('span');
+
+            piece.className =
+                'confetti';
+
+            piece.style.left =
+                Math.random() * 100 + 'vw';
+
+            piece.style.background =
+                colors[
+                    Math.floor(
+                        Math.random() *
+                        colors.length
+                    )
+                ];
+
+            piece.style.animationDelay =
+                Math.random() * .35 + 's';
+
+            piece.style.animationDuration =
+                1.4 +
+                Math.random() * .9 +
+                's';
+
+            celebration.appendChild(
+                piece
+            );
+        }
+
+        setTimeout(function () {
+            celebration.innerHTML = '';
+        }, 2600);
+    }
+
+    updateStatus();
+
+})();
+</script>
+
+</body>
+</html>
