@@ -13,7 +13,6 @@
     --gold: #f2c14e;
     --cream: #fff9e8;
     --text: #1f2933;
-    --line: #c8d2dc;
     --white: #ffffff;
 }
 
@@ -23,65 +22,71 @@
 
 body {
     margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    color: var(--text);
-    background: transparent;
-}
-
-.player {
-    width: 100%;
-    padding: 18px 20px;
-    background: var(--cream);
-    border-left: 6px solid var(--gold);
-    border-radius: 5px;
-}
-
-.layout {
+    min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background:
+        linear-gradient(
+            rgba(18, 53, 91, .72),
+            rgba(18, 53, 91, .72)
+        ),
+        linear-gradient(
+            135deg,
+            #0b568f,
+            #12355b 55%,
+            #5e438d
+        );
 }
 
-.copy {
-    flex: 1 1 440px;
+.screen {
+    width: min(760px, calc(100% - 32px));
+    padding: 34px 30px;
+    text-align: center;
+    background: var(--cream);
+    border: 6px solid var(--navy);
+    box-shadow:
+        0 0 0 6px var(--gold),
+        12px 12px 0 rgba(0, 0, 0, .25);
 }
 
-.label {
-    margin: 0 0 4px;
+.eyebrow {
+    margin: 0 0 8px;
     color: var(--blue);
     font-size: 13px;
     font-weight: 700;
-    letter-spacing: .04em;
+    letter-spacing: .08em;
 }
 
 h1 {
-    margin: 0 0 4px;
+    margin: 0 0 8px;
     color: var(--navy);
-    font-size: 20px;
-    line-height: 1.3;
+    font-size: clamp(30px, 6vw, 48px);
+    line-height: 1.1;
 }
 
-.description {
-    margin: 0;
-    font-size: 15px;
+.subtitle {
+    margin: 0 0 28px;
+    color: #4b5b68;
+    font-size: 18px;
 }
 
 .controls {
-    flex: 0 0 auto;
     display: flex;
-    gap: 10px;
-    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 button {
-    min-height: 44px;
-    padding: 10px 16px;
-    border: 2px solid var(--navy);
-    border-radius: 5px;
+    min-height: 48px;
+    padding: 12px 20px;
+    border: 3px solid var(--navy);
+    border-radius: 4px;
     font: inherit;
+    font-size: 16px;
     font-weight: 700;
     cursor: pointer;
 }
@@ -98,70 +103,95 @@ button {
 
 button:hover,
 button:focus-visible {
-    outline: 3px solid var(--gold);
-    outline-offset: 2px;
+    outline: 4px solid var(--gold);
+    outline-offset: 3px;
 }
 
 .status {
-    margin: 10px 0 0;
+    margin: 24px 0 0;
+    min-height: 28px;
     color: #4b5b68;
-    font-size: 13px;
+    font-size: 14px;
 }
 
-.equalizer {
-    display: inline-flex;
+.progress {
+    width: 100%;
+    height: 10px;
+    margin: 18px 0 0;
+    overflow: hidden;
+    background: #d9e1e7;
+    border: 2px solid var(--navy);
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+    background: var(--gold);
+}
+
+.playing .progress-bar {
+    animation: fill 10.2s linear forwards;
+}
+
+.pixel-row {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    height: 26px;
+    margin: 22px 0 0;
     align-items: flex-end;
-    gap: 3px;
-    height: 16px;
-    margin-right: 6px;
-    vertical-align: middle;
 }
 
-.bar {
-    width: 4px;
-    height: 5px;
+.pixel {
+    width: 10px;
+    height: 8px;
     background: var(--blue);
 }
 
-.playing .bar:nth-child(1) {
-    animation: bounce .45s infinite alternate;
-}
-
-.playing .bar:nth-child(2) {
+.playing .pixel:nth-child(1) {
     animation: bounce .35s infinite alternate;
 }
 
-.playing .bar:nth-child(3) {
-    animation: bounce .55s infinite alternate;
+.playing .pixel:nth-child(2) {
+    animation: bounce .5s infinite alternate;
 }
 
-.playing .bar:nth-child(4) {
-    animation: bounce .3s infinite alternate;
+.playing .pixel:nth-child(3) {
+    animation: bounce .28s infinite alternate;
+}
+
+.playing .pixel:nth-child(4) {
+    animation: bounce .42s infinite alternate;
+}
+
+.playing .pixel:nth-child(5) {
+    animation: bounce .34s infinite alternate;
 }
 
 @keyframes bounce {
     from {
-        height: 4px;
+        height: 7px;
     }
 
     to {
-        height: 16px;
+        height: 25px;
+    }
+}
+
+@keyframes fill {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .bar {
+    .pixel,
+    .progress-bar {
         animation: none !important;
-    }
-}
-
-@media (max-width: 650px) {
-    .controls {
-        width: 100%;
-    }
-
-    button {
-        flex: 1;
     }
 }
 </style>
@@ -169,44 +199,58 @@ button:focus-visible {
 
 <body>
 
-<section class="player" aria-labelledby="musicTitle">
+<main
+    class="screen"
+    id="screen"
+    aria-labelledby="title">
 
-    <div class="layout">
+    <p class="eyebrow">
+        GREAT FALLS COLLEGE
+    </p>
 
-        <div class="copy">
+    <h1 id="title">
+        Hiring Training
+    </h1>
 
-            <p class="label">
-                OPTIONAL SOUNDTRACK
-            </p>
+    <p class="subtitle">
+        Your Search Committee Quest Begins
+    </p>
 
-            <h1 id="musicTitle">
-                Begin Your Search Committee Quest
-            </h1>
+    <div class="controls">
 
-            <p class="description">
-                Start with a short retro game-style introduction.
-            </p>
+        <button
+            id="startButton"
+            class="primary"
+            type="button">
+            ▶ Start Training
+        </button>
 
-        </div>
+        <button
+            id="skipButton"
+            class="secondary"
+            type="button">
+            Skip Intro →
+        </button>
 
-        <div class="controls">
+    </div>
 
-            <button
-                id="playButton"
-                class="primary"
-                type="button">
-                ▶ Start Training
-            </button>
+    <div
+        class="pixel-row"
+        aria-hidden="true">
 
-            <button
-                id="stopButton"
-                class="secondary"
-                type="button"
-                hidden>
-                ■ Stop
-            </button>
+        <span class="pixel"></span>
+        <span class="pixel"></span>
+        <span class="pixel"></span>
+        <span class="pixel"></span>
+        <span class="pixel"></span>
 
-        </div>
+    </div>
+
+    <div
+        class="progress"
+        aria-hidden="true">
+
+        <div class="progress-bar"></div>
 
     </div>
 
@@ -214,43 +258,41 @@ button:focus-visible {
         id="status"
         class="status"
         aria-live="polite">
-
-        <span
-            id="equalizer"
-            class="equalizer"
-            aria-hidden="true">
-
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-
-        </span>
-
-        Sound is optional. Your browser will not play it until you select Start Training.
-
+        Select Start Training to play the intro.
     </p>
 
-</section>
+</main>
 
 <script>
 (function () {
 
-    const playButton =
-        document.getElementById('playButton');
+    const nextPage =
+        "https://gfcmsu.instructure.com/courses/5243/pages/about-our-class-2?module_item_id=677112";
 
-    const stopButton =
-        document.getElementById('stopButton');
+    const screen =
+        document.getElementById('screen');
+
+    const startButton =
+        document.getElementById('startButton');
+
+    const skipButton =
+        document.getElementById('skipButton');
 
     const status =
         document.getElementById('status');
 
-    const equalizer =
-        document.getElementById('equalizer');
-
     let context = null;
     let activeNodes = [];
-    let stopTimer = null;
+    let redirectTimer = null;
+    let started = false;
+
+    function goToCanvas() {
+
+        stopAudio();
+
+        window.location.href =
+            nextPage;
+    }
 
     function createContext() {
 
@@ -313,21 +355,6 @@ button:focus-visible {
         );
     }
 
-    function bass(
-        frequency,
-        start,
-        duration
-    ) {
-
-        playNote(
-            frequency,
-            start,
-            duration,
-            'triangle',
-            0.055
-        );
-    }
-
     function melody(
         frequency,
         start,
@@ -351,6 +378,21 @@ button:focus-visible {
         );
     }
 
+    function bass(
+        frequency,
+        start,
+        duration
+    ) {
+
+        playNote(
+            frequency,
+            start,
+            duration,
+            'triangle',
+            0.05
+        );
+    }
+
     function bell(
         frequency,
         start,
@@ -362,13 +404,17 @@ button:focus-visible {
             start,
             duration,
             'sine',
-            0.045
+            0.04
         );
     }
 
-    function playTheme() {
+    function startIntro() {
 
-        stopTheme();
+        if (started) {
+            return;
+        }
+
+        started = true;
 
         context =
             createContext();
@@ -376,14 +422,8 @@ button:focus-visible {
         const now =
             context.currentTime + 0.05;
 
-        /*
-         * Original short theme.
-         * Roughly 10 seconds.
-         *
-         * C major / A minor flavor.
-         */
-
         const melodyNotes = [
+
             [523.25, 0.00, .35],
             [659.25, 0.42, .35],
             [783.99, 0.84, .50],
@@ -410,19 +450,23 @@ button:focus-visible {
             [783.99, 8.30, .30],
             [987.77, 8.66, .30],
             [1046.50, 9.02, .80]
+
         ];
 
-        melodyNotes.forEach(function (note) {
+        melodyNotes.forEach(
+            function (note) {
 
-            melody(
-                note[0],
-                now + note[1],
-                note[2]
-            );
+                melody(
+                    note[0],
+                    now + note[1],
+                    note[2]
+                );
 
-        });
+            }
+        );
 
         const bassNotes = [
+
             [130.81, 0.00],
             [174.61, 1.20],
             [196.00, 2.40],
@@ -431,17 +475,20 @@ button:focus-visible {
             [174.61, 6.00],
             [196.00, 7.20],
             [130.81, 8.40]
+
         ];
 
-        bassNotes.forEach(function (note) {
+        bassNotes.forEach(
+            function (note) {
 
-            bass(
-                note[0],
-                now + note[1],
-                1.05
-            );
+                bass(
+                    note[0],
+                    now + note[1],
+                    1.05
+                );
 
-        });
+            }
+        );
 
         const arpeggio = [
             261.63,
@@ -458,10 +505,6 @@ button:focus-visible {
                 .18
             );
         }
-
-        /*
-         * Final "quest accepted" cadence.
-         */
 
         bell(
             523.25,
@@ -481,44 +524,35 @@ button:focus-visible {
             .75
         );
 
-        equalizer.classList.add(
+        screen.classList.add(
             'playing'
         );
 
-        playButton.textContent =
-            '↻ Replay Intro';
+        startButton.disabled =
+            true;
 
-        stopButton.hidden =
-            false;
+        startButton.textContent =
+            'Intro Playing...';
 
-        status.lastChild.textContent =
-            ' Intro soundtrack playing.';
+        status.textContent =
+            'Opening Hiring Training...';
 
-        stopTimer =
-            setTimeout(function () {
-
-                equalizer.classList.remove(
-                    'playing'
-                );
-
-                stopButton.hidden =
-                    true;
-
-                status.lastChild.textContent =
-                    ' Intro complete. You can replay it anytime.';
-
-            }, 10500);
+        redirectTimer =
+            setTimeout(
+                goToCanvas,
+                10300
+            );
     }
 
-    function stopTheme() {
+    function stopAudio() {
 
-        if (stopTimer) {
+        if (redirectTimer) {
 
             clearTimeout(
-                stopTimer
+                redirectTimer
             );
 
-            stopTimer =
+            redirectTimer =
                 null;
         }
 
@@ -533,8 +567,7 @@ button:focus-visible {
             }
         );
 
-        activeNodes =
-            [];
+        activeNodes = [];
 
         if (context) {
 
@@ -543,33 +576,18 @@ button:focus-visible {
             } catch (error) {
             }
 
-            context =
-                null;
+            context = null;
         }
-
-        equalizer.classList.remove(
-            'playing'
-        );
-
-        stopButton.hidden =
-            true;
     }
 
-    playButton.addEventListener(
+    startButton.addEventListener(
         'click',
-        playTheme
+        startIntro
     );
 
-    stopButton.addEventListener(
+    skipButton.addEventListener(
         'click',
-        function () {
-
-            stopTheme();
-
-            status.lastChild.textContent =
-                ' Sound stopped. Select Replay Intro to hear it again.';
-
-        }
+        goToCanvas
     );
 
 })();
