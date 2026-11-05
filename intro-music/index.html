@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Hiring Training Intro</title>
+
+<style>
+:root {
+    --navy: #12355b;
+    --blue: #0b568f;
+    --gold: #f2c14e;
+    --cream: #fff9e8;
+    --text: #1f2933;
+    --line: #c8d2dc;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: transparent;
+}
+
+.player {
+    width: 100%;
+    padding: 18px 20px;
+    background: var(--cream);
+    border-left: 6px solid var(--gold);
+    border-radius: 5px;
+}
+
+.layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.copy {
+    flex: 1 1 440px;
+}
+
+.label {
+    margin: 0 0 4px;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .04em;
+}
+
+h1 {
+    margin: 0 0 4px;
+    color: var(--navy);
+    font-size: 20px;
+    line-height: 1.3;
+}
+
+.description {
+    margin: 0;
+    font-size: 15px;
+}
+
+.controls {
+    flex: 0 0 auto;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+button {
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 2px solid var(--navy);
+    border-radius: 5px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.primary {
+    background: var(--navy);
+    color: var(--white);
+}
+
+.secondary {
+    background: var(--white);
+    color: var(--navy);
+}
+
+button:hover,
+button:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+}
+
+.status {
+    margin: 10px 0 0;
+    color: #4b5b68;
+    font-size: 13px;
+}
+
+.equalizer {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 16px;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.bar {
+    width: 4px;
+    height: 5px;
+    background: var(--blue);
+}
+
+.playing .bar:nth-child(1) {
+    animation: bounce .45s infinite alternate;
+}
+
+.playing .bar:nth-child(2) {
+    animation: bounce .35s infinite alternate;
+}
+
+.playing .bar:nth-child(3) {
+    animation: bounce .55s infinite alternate;
+}
+
+.playing .bar:nth-child(4) {
+    animation: bounce .3s infinite alternate;
+}
+
+@keyframes bounce {
+    from {
+        height: 4px;
+    }
+
+    to {
+        height: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bar {
+        animation: none !important;
+    }
+}
+
+@media (max-width: 650px) {
+    .controls {
+        width: 100%;
+    }
+
+    button {
+        flex: 1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section class="player" aria-labelledby="musicTitle">
+
+    <div class="layout">
+
+        <div class="copy">
+
+            <p class="label">
+                OPTIONAL SOUNDTRACK
+            </p>
+
+            <h1 id="musicTitle">
+                Begin Your Search Committee Quest
+            </h1>
+
+            <p class="description">
+                Start with a short retro game-style introduction.
+            </p>
+
+        </div>
+
+        <div class="controls">
+
+            <button
+                id="playButton"
+                class="primary"
+                type="button">
+                ▶ Start Training
+            </button>
+
+            <button
+                id="stopButton"
+                class="secondary"
+                type="button"
+                hidden>
+                ■ Stop
+            </button>
+
+        </div>
+
+    </div>
+
+    <p
+        id="status"
+        class="status"
+        aria-live="polite">
+
+        <span
+            id="equalizer"
+            class="equalizer"
+            aria-hidden="true">
+
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+
+        </span>
+
+        Sound is optional. Your browser will not play it until you select Start Training.
+
+    </p>
+
+</section>
+
+<script>
+(function () {
+
+    const playButton =
+        document.getElementById('playButton');
+
+    const stopButton =
+        document.getElementById('stopButton');
+
+    const status =
+        document.getElementById('status');
+
+    const equalizer =
+        document.getElementById('equalizer');
+
+    let context = null;
+    let activeNodes = [];
+    let stopTimer = null;
+
+    function createContext() {
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        return new AudioContext();
+    }
+
+    function playNote(
+        frequency,
+        start,
+        duration,
+        type,
+        volume
+    ) {
+
+        const oscillator =
+            context.createOscillator();
+
+        const gain =
+            context.createGain();
+
+        oscillator.type =
+            type;
+
+        oscillator.frequency.setValueAtTime(
+            frequency,
+            start
+        );
+
+        gain.gain.setValueAtTime(
+            0.0001,
+            start
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            volume,
+            start + 0.02
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.0001,
+            start + duration
+        );
+
+        oscillator
+            .connect(gain)
+            .connect(context.destination);
+
+        oscillator.start(start);
+
+        oscillator.stop(
+            start + duration + 0.03
+        );
+
+        activeNodes.push(
+            oscillator
+        );
+    }
+
+    function bass(
+        frequency,
+        start,
+        duration
+    ) {
+
+        playNote(
+            frequency,
+            start,
+            duration,
+            'triangle',
+            0.055
+        );
+    }
+
+    function melody(
+        frequency,
+        start,
+        duration
+    ) {
+
+        playNote(
+            frequency,
+            start,
+            duration,
+            'square',
+            0.035
+        );
+
+        playNote(
+            frequency * 2,
+            start,
+            duration * 0.75,
+            'sine',
+            0.018
+        );
+    }
+
+    function bell(
+        frequency,
+        start,
+        duration
+    ) {
+
+        playNote(
+            frequency,
+            start,
+            duration,
+            'sine',
+            0.045
+        );
+    }
+
+    function playTheme() {
+
+        stopTheme();
+
+        context =
+            createContext();
+
+        const now =
+            context.currentTime + 0.05;
+
+        /*
+         * Original short theme.
+         * Roughly 10 seconds.
+         *
+         * C major / A minor flavor.
+         */
+
+        const melodyNotes = [
+            [523.25, 0.00, .35],
+            [659.25, 0.42, .35],
+            [783.99, 0.84, .50],
+            [659.25, 1.40, .32],
+
+            [698.46, 1.78, .35],
+            [783.99, 2.20, .35],
+            [880.00, 2.62, .60],
+
+            [783.99, 3.34, .30],
+            [659.25, 3.70, .30],
+            [587.33, 4.06, .38],
+            [659.25, 4.50, .55],
+
+            [523.25, 5.18, .30],
+            [659.25, 5.54, .30],
+            [783.99, 5.90, .35],
+            [987.77, 6.34, .60],
+
+            [880.00, 7.06, .32],
+            [783.99, 7.44, .32],
+            [659.25, 7.82, .38],
+
+            [783.99, 8.30, .30],
+            [987.77, 8.66, .30],
+            [1046.50, 9.02, .80]
+        ];
+
+        melodyNotes.forEach(function (note) {
+
+            melody(
+                note[0],
+                now + note[1],
+                note[2]
+            );
+
+        });
+
+        const bassNotes = [
+            [130.81, 0.00],
+            [174.61, 1.20],
+            [196.00, 2.40],
+            [174.61, 3.60],
+            [130.81, 4.80],
+            [174.61, 6.00],
+            [196.00, 7.20],
+            [130.81, 8.40]
+        ];
+
+        bassNotes.forEach(function (note) {
+
+            bass(
+                note[0],
+                now + note[1],
+                1.05
+            );
+
+        });
+
+        const arpeggio = [
+            261.63,
+            329.63,
+            392.00,
+            329.63
+        ];
+
+        for (let i = 0; i < 32; i++) {
+
+            bell(
+                arpeggio[i % 4],
+                now + i * .30,
+                .18
+            );
+        }
+
+        /*
+         * Final "quest accepted" cadence.
+         */
+
+        bell(
+            523.25,
+            now + 9.35,
+            .55
+        );
+
+        bell(
+            659.25,
+            now + 9.47,
+            .55
+        );
+
+        bell(
+            783.99,
+            now + 9.59,
+            .75
+        );
+
+        equalizer.classList.add(
+            'playing'
+        );
+
+        playButton.textContent =
+            '↻ Replay Intro';
+
+        stopButton.hidden =
+            false;
+
+        status.lastChild.textContent =
+            ' Intro soundtrack playing.';
+
+        stopTimer =
+            setTimeout(function () {
+
+                equalizer.classList.remove(
+                    'playing'
+                );
+
+                stopButton.hidden =
+                    true;
+
+                status.lastChild.textContent =
+                    ' Intro complete. You can replay it anytime.';
+
+            }, 10500);
+    }
+
+    function stopTheme() {
+
+        if (stopTimer) {
+
+            clearTimeout(
+                stopTimer
+            );
+
+            stopTimer =
+                null;
+        }
+
+        activeNodes.forEach(
+            function (node) {
+
+                try {
+                    node.stop();
+                } catch (error) {
+                }
+
+            }
+        );
+
+        activeNodes =
+            [];
+
+        if (context) {
+
+            try {
+                context.close();
+            } catch (error) {
+            }
+
+            context =
+                null;
+        }
+
+        equalizer.classList.remove(
+            'playing'
+        );
+
+        stopButton.hidden =
+            true;
+    }
+
+    playButton.addEventListener(
+        'click',
+        playTheme
+    );
+
+    stopButton.addEventListener(
+        'click',
+        function () {
+
+            stopTheme();
+
+            status.lastChild.textContent =
+                ' Sound stopped. Select Replay Intro to hear it again.';
+
+        }
+    );
+
+})();
+</script>
+
+</body>
+</html>
