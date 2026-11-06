@@ -9,14 +9,24 @@
 <style>
 :root {
     --navy: #12355b;
-    --blue: #0b568f;
-    --gold: #f2c14e;
+
+    --deep: #79451f;
+    --dark: #4b2a12;
+    --mid: #a65f28;
+    --rust: #c9782f;
+    --orange: #dd9144;
+    --light: #f1b66e;
+    --highlight: #ffe0a8;
+
+    --pale: #f7ead5;
+    --pale2: #fff9f0;
+    --line: #efd1a6;
+
     --text: #1f2933;
-    --pale: #f3f7fa;
-    --line: #c8d2dc;
+    --white: #ffffff;
+
     --success: #176b46;
     --danger: #8c2f39;
-    --white: #ffffff;
 }
 
 * {
@@ -27,123 +37,170 @@ body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--text);
-    background: var(--white);
+    background: var(--pale);
     font-size: 16px;
     line-height: 1.55;
 }
 
 .wrap {
-    max-width: 1050px;
-    margin: 0 auto;
-    padding: 0;
+    width: 100%;
+    margin: 0;
+    padding: 18px;
 }
 
 .activity {
-    border: 0;
-    border-radius: 0;
-    overflow: visible;
-    background: var(--white);
+    width: 100%;
+    margin: 0;
 }
+
+/* =========================================================
+   TITLE
+========================================================= */
 
 .head {
+    margin: 0 0 18px;
     padding: 18px 22px;
-    background: var(--navy);
-    color: var(--white);
-    border-left: 7px solid var(--gold);
-}
 
-.eyebrow {
-    margin: 0 0 4px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .05em;
+    background: var(--deep);
+    color: var(--white);
+
+    border-top: 4px solid var(--light);
+    border-left: 4px solid var(--orange);
+    border-right: 5px solid var(--dark);
+    border-bottom: 6px solid var(--dark);
+
+    border-radius: 5px;
+
+    box-shadow: 5px 5px 0 var(--mid);
 }
 
 h1 {
     margin: 0;
     color: var(--white);
-    font-size: 24px;
+    font-size: 26px;
+    font-weight: 800;
     line-height: 1.25;
 }
 
 .intro {
-    margin: 0;
-    padding: 18px 22px 6px;
+    margin: 0 0 22px;
+    padding: 0 4px;
 }
+
+/* =========================================================
+   QUESTIONS
+========================================================= */
 
 .question {
-    margin: 12px 22px 0;
-    padding: 20px 0 0;
-    border-top: 1px solid var(--line);
-}
+    margin: 0 0 28px;
+    padding: 22px;
 
-.qnum {
-    margin: 0 0 4px;
-    color: var(--blue);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .05em;
+    background: var(--pale2);
+
+    border-top: 3px solid var(--highlight);
+    border-left: 3px solid var(--orange);
+    border-right: 4px solid #a9672e;
+    border-bottom: 5px solid #a9672e;
+
+    border-radius: 5px;
+
+    box-shadow: 5px 5px 0 #e3c9a4;
 }
 
 h2 {
-    margin: 0 0 10px;
+    margin: 0 0 16px;
     color: var(--navy);
-    font-size: 20px;
+    font-size: 21px;
+    font-weight: 800;
     line-height: 1.35;
 }
 
+/* =========================================================
+   SCENARIO
+========================================================= */
+
 .case {
-    margin: 0 0 14px;
-    padding: 14px 16px;
-    background: var(--pale);
-    border-left: 5px solid var(--navy);
+    margin: 0 0 18px;
+    padding: 16px 18px;
+
+    background: #f7ead5;
+
+    border-top: 3px solid #f3d5a9;
+    border-left: 5px solid var(--mid);
+    border-right: 3px solid #dcb278;
+    border-bottom: 4px solid #dcb278;
+
+    border-radius: 4px;
 }
+
+.case strong {
+    color: var(--navy);
+}
+
+/* =========================================================
+   ANSWERS
+========================================================= */
 
 .options {
     display: grid;
-    gap: 10px;
-}
-
-.option,
-.smallbtn {
-    font: inherit;
-    font-weight: 700;
-    cursor: pointer;
-    border: 2px solid var(--navy);
-    border-radius: 5px;
-    background: var(--white);
-    color: var(--navy);
+    gap: 12px;
 }
 
 .option {
     width: 100%;
-    padding: 13px 15px;
-    text-align: left;
-}
+    padding: 14px 16px;
 
-.smallbtn {
-    padding: 9px 12px;
+    font: inherit;
+    font-weight: 700;
+    text-align: left;
+
+    cursor: pointer;
+
+    color: var(--navy);
+    background: var(--white);
+
+    border-top: 3px solid #fff0d4;
+    border-left: 3px solid var(--light);
+    border-right: 4px solid #a9672e;
+    border-bottom: 5px solid #a9672e;
+
+    border-radius: 5px;
+
+    box-shadow: 4px 4px 0 #e6cfaa;
 }
 
 .option:hover,
-.option:focus-visible,
-.smallbtn:hover,
-.smallbtn:focus-visible {
-    background: var(--pale);
-    outline: 3px solid var(--gold);
-    outline-offset: 2px;
+.option:focus-visible {
+    background: #fff3df;
+
+    outline: 3px solid var(--orange);
+    outline-offset: 3px;
 }
 
 .option[aria-pressed="true"] {
-    background: var(--navy);
     color: var(--white);
+    background: var(--deep);
+
+    border-top-color: var(--light);
+    border-left-color: var(--orange);
+    border-right-color: var(--dark);
+    border-bottom-color: var(--dark);
+
+    box-shadow: 4px 4px 0 var(--mid);
 }
 
+/* =========================================================
+   FEEDBACK
+========================================================= */
+
 .feedback {
-    margin: 12px 0 0;
-    padding: 12px 14px;
-    background: var(--pale);
-    border-left: 5px solid var(--navy);
+    margin: 16px 0 0;
+    padding: 13px 15px;
+
+    background: #f7ead5;
+
+    border-left: 6px solid var(--mid);
+    border-radius: 3px;
 }
 
 .feedback.good {
@@ -154,16 +211,67 @@ h2 {
     border-left-color: var(--danger);
 }
 
+/* =========================================================
+   COMPLETION
+========================================================= */
+
 .footer {
-    margin: 22px;
-    padding: 18px 20px;
-    background: var(--pale);
-    border-left: 6px solid var(--navy);
+    margin: 4px 0 0;
+    padding: 20px 22px;
+
+    color: var(--white);
+    background: var(--deep);
+
+    border-top: 4px solid var(--light);
+    border-left: 4px solid var(--orange);
+    border-right: 5px solid var(--dark);
+    border-bottom: 6px solid var(--dark);
+
+    border-radius: 5px;
+
+    box-shadow: 5px 5px 0 var(--mid);
+}
+
+.footer strong {
+    color: var(--white);
 }
 
 .controls {
     margin-top: 14px;
 }
+
+.smallbtn {
+    padding: 10px 14px;
+
+    font: inherit;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    color: var(--navy);
+    background: var(--white);
+
+    border-top: 3px solid var(--highlight);
+    border-left: 3px solid var(--orange);
+    border-right: 4px solid var(--dark);
+    border-bottom: 5px solid var(--dark);
+
+    border-radius: 5px;
+
+    box-shadow: 4px 4px 0 var(--mid);
+}
+
+.smallbtn:hover,
+.smallbtn:focus-visible {
+    background: #fff3df;
+
+    outline: 3px solid var(--light);
+    outline-offset: 3px;
+}
+
+/* =========================================================
+   CONFETTI
+========================================================= */
 
 .celebration {
     position: fixed;
@@ -196,20 +304,20 @@ h2 {
 }
 
 @media (max-width: 700px) {
+
+    .wrap {
+        padding: 12px;
+    }
+
     .head,
-    .intro,
+    .question,
     .footer {
         padding-left: 16px;
         padding-right: 16px;
     }
 
-    .question {
-        margin-left: 16px;
-        margin-right: 16px;
-    }
-
     h1 {
-        font-size: 22px;
+        font-size: 23px;
     }
 
     h2 {
@@ -223,136 +331,205 @@ h2 {
 
 <main class="wrap">
 
-<section class="activity" aria-labelledby="activity-title">
+<section
+    class="activity"
+    aria-labelledby="activity-title">
 
-<header class="head">
-        <h1 id="activity-title">Recommendation &amp; Closing the Search</h1>
-</header>
+    <header class="head">
 
-<p class="intro">
-    Choose the best response for both situations. Both answers must be correct to complete the activity.
-</p>
+        <h1 id="activity-title">
+            Recommendation &amp; Closing the Search
+        </h1>
 
-<section class="question" id="q1">
+    </header>
 
-    <p class="qnum">QUESTION 1</p>
 
-    <h2>
-        Which statement provides the stronger hiring rationale?
-    </h2>
-
-    <div class="case">
-        The committee has completed screening, interviews, and reference checks.
-    </div>
-
-    <div class="options" role="group" aria-label="Question 1 answer choices">
-
-        <button class="option"
-                type="button"
-                data-q="1"
-                data-correct="false"
-                aria-pressed="false">
-            Chris was everyone's favorite and seemed like the best fit for the team.
-        </button>
-
-        <button class="option"
-                type="button"
-                data-q="1"
-                data-correct="true"
-                aria-pressed="false">
-            Chris meets all required qualifications and demonstrated specific experience that directly addresses the position's stated needs.
-        </button>
-
-        <button class="option"
-                type="button"
-                data-q="1"
-                data-correct="false"
-                aria-pressed="false">
-            Chris interviewed confidently, and the committee had a good feeling about the conversation.
-        </button>
-
-    </div>
-
-    <div class="feedback"
-         id="f1"
-         aria-live="polite"
-         hidden>
-    </div>
-
-</section>
-
-<section class="question" id="q2">
-
-    <p class="qnum">QUESTION 2</p>
-
-    <h2>
-        The committee has selected its recommended candidate.
-    </h2>
-
-    <div class="case">
-        What should happen next?
-    </div>
-
-    <div class="options" role="group" aria-label="Question 2 answer choices">
-
-        <button class="option"
-                type="button"
-                data-q="2"
-                data-correct="false"
-                aria-pressed="false">
-            A committee member should contact the candidate immediately and make the offer.
-        </button>
-
-        <button class="option"
-                type="button"
-                data-q="2"
-                data-correct="true"
-                aria-pressed="false">
-            The committee should submit its recommendation and documentation so HR can move the approval and offer process forward.
-        </button>
-
-        <button class="option"
-                type="button"
-                data-q="2"
-                data-correct="false"
-                aria-pressed="false">
-            The committee should notify the remaining candidates before submitting the recommendation to HR.
-        </button>
-
-    </div>
-
-    <div class="feedback"
-         id="f2"
-         aria-live="polite"
-         hidden>
-    </div>
-
-</section>
-
-<div class="footer">
-
-    <p id="status" style="margin: 0;">
-        <strong>Complete both questions.</strong>
-        You may revise an answer after reading the feedback.
+    <p class="intro">
+        Choose the best response for both situations. Both answers must be correct to complete the activity.
     </p>
 
-    <div class="controls">
-        <button class="smallbtn"
+
+    <!-- =====================================================
+         QUESTION 1
+    ====================================================== -->
+    <section
+        class="question"
+        id="q1">
+
+        <h2>
+            Question 1: Which statement provides the stronger hiring rationale?
+        </h2>
+
+
+        <div class="case">
+            The committee has completed screening, interviews, and reference checks.
+        </div>
+
+
+        <div
+            class="options"
+            role="group"
+            aria-label="Question 1 answer choices">
+
+            <button
+                class="option"
+                type="button"
+                data-q="1"
+                data-correct="false"
+                aria-pressed="false">
+
+                Chris was everyone's favorite and seemed like the best fit for the team.
+
+            </button>
+
+
+            <button
+                class="option"
+                type="button"
+                data-q="1"
+                data-correct="true"
+                aria-pressed="false">
+
+                Chris meets all required qualifications and demonstrated specific experience that directly addresses the position's stated needs.
+
+            </button>
+
+
+            <button
+                class="option"
+                type="button"
+                data-q="1"
+                data-correct="false"
+                aria-pressed="false">
+
+                Chris interviewed confidently, and the committee had a good feeling about the conversation.
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="feedback"
+            id="f1"
+            aria-live="polite"
+            hidden>
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         QUESTION 2
+    ====================================================== -->
+    <section
+        class="question"
+        id="q2">
+
+        <h2>
+            Question 2: The committee has selected its recommended candidate.
+        </h2>
+
+
+        <div class="case">
+            What should happen next?
+        </div>
+
+
+        <div
+            class="options"
+            role="group"
+            aria-label="Question 2 answer choices">
+
+            <button
+                class="option"
+                type="button"
+                data-q="2"
+                data-correct="false"
+                aria-pressed="false">
+
+                A committee member should contact the candidate immediately and make the offer.
+
+            </button>
+
+
+            <button
+                class="option"
+                type="button"
+                data-q="2"
+                data-correct="true"
+                aria-pressed="false">
+
+                The committee should submit its recommendation and documentation so HR can move the approval and offer process forward.
+
+            </button>
+
+
+            <button
+                class="option"
+                type="button"
+                data-q="2"
+                data-correct="false"
+                aria-pressed="false">
+
+                The committee should notify the remaining candidates before submitting the recommendation to HR.
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="feedback"
+            id="f2"
+            aria-live="polite"
+            hidden>
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         STATUS
+    ====================================================== -->
+    <div class="footer">
+
+        <p
+            id="status"
+            style="margin: 0;">
+
+            <strong>Complete both questions.</strong>
+            You may revise an answer after reading the feedback.
+
+        </p>
+
+
+        <div class="controls">
+
+            <button
+                class="smallbtn"
                 id="reset"
                 type="button">
-            Reset activity
-        </button>
+
+                Reset Activity
+
+            </button>
+
+        </div>
+
     </div>
 
-</div>
-
 </section>
+
 </main>
 
-<div class="celebration"
-     id="celebration"
-     aria-hidden="true">
+
+<div
+    class="celebration"
+    id="celebration"
+    aria-hidden="true">
 </div>
+
 
 <script>
 (function () {
@@ -378,6 +555,7 @@ h2 {
         1: {
             good:
                 "<strong>Correct.</strong> A defensible hiring rationale connects the recommendation to the posted qualifications and specific evidence gathered during the search.",
+
             bad:
                 "<strong>Not quite.</strong> Preference, confidence, or general impressions are not enough. The recommendation should be tied to the qualifications and documented evidence."
         },
@@ -385,10 +563,12 @@ h2 {
         2: {
             good:
                 "<strong>Correct.</strong> The committee provides the recommendation and required documentation. Human Resources then moves the approval and offer process forward.",
+
             bad:
                 "<strong>Not quite.</strong> The committee recommends, but HR coordinates the approval, offer, and subsequent candidate communication process."
         }
     };
+
 
     function updateStatus() {
 
@@ -410,7 +590,6 @@ h2 {
                 celebrated = true;
 
                 launchConfetti();
-
                 playSuccessChime();
             }
 
@@ -426,68 +605,76 @@ h2 {
         }
     }
 
+
     document
         .querySelectorAll('.option')
         .forEach(function (button) {
 
-            button.addEventListener('click', function () {
+            button.addEventListener(
+                'click',
+                function () {
 
-                const question =
-                    Number(button.dataset.q);
+                    const question =
+                        Number(button.dataset.q);
 
-                const correct =
-                    button.dataset.correct === 'true';
+                    const correct =
+                        button.dataset.correct === 'true';
 
-                answers[question] =
-                    correct;
+                    answers[question] =
+                        correct;
 
-                document
-                    .querySelectorAll(
-                        '[data-q="' +
-                        question +
-                        '"]'
-                    )
-                    .forEach(function (choice) {
+                    document
+                        .querySelectorAll(
+                            '[data-q="' +
+                            question +
+                            '"]'
+                        )
+                        .forEach(
+                            function (choice) {
 
-                        choice.setAttribute(
-                            'aria-pressed',
-                            choice === button
-                                ? 'true'
-                                : 'false'
+                                choice.setAttribute(
+                                    'aria-pressed',
+                                    choice === button
+                                        ? 'true'
+                                        : 'false'
+                                );
+
+                            }
                         );
 
-                    });
+                    const response =
+                        document.getElementById(
+                            'f' + question
+                        );
 
-                const response =
-                    document.getElementById(
-                        'f' + question
-                    );
+                    response.hidden =
+                        false;
 
-                response.hidden =
-                    false;
+                    response.className =
+                        'feedback ' +
+                        (
+                            correct
+                                ? 'good'
+                                : 'bad'
+                        );
 
-                response.className =
-                    'feedback ' +
-                    (correct
-                        ? 'good'
-                        : 'bad');
+                    response.innerHTML =
+                        correct
+                            ? feedback[question].good
+                            : feedback[question].bad;
 
-                response.innerHTML =
-                    correct
-                        ? feedback[question].good
-                        : feedback[question].bad;
+                    if (correct) {
+                        playCorrectSound();
+                    } else {
+                        playIncorrectSound();
+                    }
 
-                if (correct) {
-                    playCorrectSound();
-                } else {
-                    playIncorrectSound();
+                    updateStatus();
                 }
-
-                updateStatus();
-
-            });
+            );
 
         });
+
 
     reset.addEventListener(
         'click',
@@ -500,32 +687,35 @@ h2 {
 
             document
                 .querySelectorAll('.option')
-                .forEach(function (button) {
+                .forEach(
+                    function (button) {
 
-                    button.setAttribute(
-                        'aria-pressed',
-                        'false'
-                    );
+                        button.setAttribute(
+                            'aria-pressed',
+                            'false'
+                        );
 
-                });
+                    }
+                );
 
-            [1, 2].forEach(function (question) {
+            [1, 2].forEach(
+                function (question) {
 
-                const response =
-                    document.getElementById(
-                        'f' + question
-                    );
+                    const response =
+                        document.getElementById(
+                            'f' + question
+                        );
 
-                response.hidden =
-                    true;
+                    response.hidden =
+                        true;
 
-                response.textContent =
-                    '';
+                    response.textContent =
+                        '';
 
-                response.className =
-                    'feedback';
-
-            });
+                    response.className =
+                        'feedback';
+                }
+            );
 
             celebration.innerHTML =
                 '';
@@ -535,9 +725,9 @@ h2 {
             document
                 .querySelector('#q1 .option')
                 .focus();
-
         }
     );
+
 
     function createAudioContext() {
 
@@ -547,6 +737,7 @@ h2 {
 
         return new AudioContext();
     }
+
 
     function playCorrectSound() {
 
@@ -599,6 +790,7 @@ h2 {
         }
     }
 
+
     function playIncorrectSound() {
 
         try {
@@ -650,6 +842,7 @@ h2 {
         }
     }
 
+
     function playSuccessChime() {
 
         try {
@@ -666,53 +859,56 @@ h2 {
                 783.99
             ];
 
-            notes.forEach(function (frequency, index) {
+            notes.forEach(
+                function (frequency, index) {
 
-                const oscillator =
-                    context.createOscillator();
+                    const oscillator =
+                        context.createOscillator();
 
-                const gain =
-                    context.createGain();
+                    const gain =
+                        context.createGain();
 
-                oscillator.type =
-                    'sine';
+                    oscillator.type =
+                        'sine';
 
-                oscillator.frequency.value =
-                    frequency;
+                    oscillator.frequency.value =
+                        frequency;
 
-                const start =
-                    now + index * .12;
+                    const start =
+                        now + index * .12;
 
-                gain.gain.setValueAtTime(
-                    .0001,
-                    start
-                );
+                    gain.gain.setValueAtTime(
+                        .0001,
+                        start
+                    );
 
-                gain.gain.exponentialRampToValueAtTime(
-                    .11,
-                    start + .01
-                );
+                    gain.gain.exponentialRampToValueAtTime(
+                        .11,
+                        start + .01
+                    );
 
-                gain.gain.exponentialRampToValueAtTime(
-                    .0001,
-                    start + .2
-                );
+                    gain.gain.exponentialRampToValueAtTime(
+                        .0001,
+                        start + .2
+                    );
 
-                oscillator
-                    .connect(gain)
-                    .connect(context.destination);
+                    oscillator
+                        .connect(gain)
+                        .connect(context.destination);
 
-                oscillator.start(start);
+                    oscillator.start(start);
 
-                oscillator.stop(
-                    start + .22
-                );
+                    oscillator.stop(
+                        start + .22
+                    );
 
-            });
+                }
+            );
 
         } catch (error) {
         }
     }
+
 
     function launchConfetti() {
 
@@ -728,25 +924,35 @@ h2 {
 
         const colors = [
             '#12355b',
-            '#0b568f',
-            '#f2c14e',
-            '#176b46',
-            '#8c2f39'
+            '#79451f',
+            '#a65f28',
+            '#c9782f',
+            '#dd9144',
+            '#f1b66e',
+            '#ffe0a8'
         ];
 
         celebration.innerHTML =
             '';
 
-        for (let i = 0; i < 55; i++) {
+        for (
+            let i = 0;
+            i < 55;
+            i++
+        ) {
 
             const piece =
-                document.createElement('span');
+                document.createElement(
+                    'span'
+                );
 
             piece.className =
                 'confetti';
 
             piece.style.left =
-                Math.random() * 100 + 'vw';
+                Math.random() *
+                100 +
+                'vw';
 
             piece.style.background =
                 colors[
@@ -757,11 +963,14 @@ h2 {
                 ];
 
             piece.style.animationDelay =
-                Math.random() * .35 + 's';
+                Math.random() *
+                .35 +
+                's';
 
             piece.style.animationDuration =
                 1.4 +
-                Math.random() * .9 +
+                Math.random() *
+                .9 +
                 's';
 
             celebration.appendChild(
@@ -769,10 +978,15 @@ h2 {
             );
         }
 
-        setTimeout(function () {
-            celebration.innerHTML = '';
-        }, 2600);
+        setTimeout(
+            function () {
+                celebration.innerHTML =
+                    '';
+            },
+            2600
+        );
     }
+
 
     updateStatus();
 
