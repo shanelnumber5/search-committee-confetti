@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,16 +10,20 @@
 <style>
 :root {
     --navy: #12355b;
+
     --deep: #174d63;
     --dark: #0c3444;
     --mid: #2a7899;
     --cyan: #4fb7d8;
     --light: #9fe6f5;
+
     --pale: #e8f6fb;
     --pale2: #f3fbfe;
     --line: #9ccfdd;
+
     --text: #1f2933;
     --white: #ffffff;
+
     --success: #176b46;
     --danger: #8c2f39;
 }
@@ -45,7 +50,6 @@ body {
 .activity {
     width: 100%;
     margin: 0;
-    background: var(--pale);
 }
 
 /* TITLE BAR */
@@ -62,6 +66,8 @@ body {
     border-right: 5px solid var(--dark);
     border-bottom: 6px solid var(--dark);
 
+    border-radius: 5px;
+
     box-shadow: 5px 5px 0 var(--mid);
 }
 
@@ -76,13 +82,12 @@ h1 {
 .intro {
     margin: 0 0 22px;
     padding: 0 4px;
-    color: var(--text);
 }
 
 /* QUESTIONS */
 
 .question {
-    margin: 0 0 26px;
+    margin: 0 0 28px;
     padding: 22px;
 
     background: var(--pale2);
@@ -110,7 +115,7 @@ h2 {
     gap: 12px;
 }
 
-/* ANSWERS */
+/* ANSWER BUTTONS */
 
 .option {
     width: 100%;
@@ -188,6 +193,8 @@ h2 {
     border-left: 4px solid var(--cyan);
     border-right: 5px solid var(--dark);
     border-bottom: 6px solid var(--dark);
+
+    border-radius: 5px;
 
     box-shadow: 5px 5px 0 var(--mid);
 }
@@ -306,6 +313,7 @@ h2 {
     </p>
 
 
+    <!-- QUESTION 1 -->
     <section
         class="question"
         id="q1">
@@ -330,6 +338,7 @@ h2 {
 
             </button>
 
+
             <button
                 class="option"
                 type="button"
@@ -340,6 +349,7 @@ h2 {
                 You should not share whether the person applied, advanced, or became a finalist.
 
             </button>
+
 
             <button
                 class="option"
@@ -354,6 +364,7 @@ h2 {
 
         </div>
 
+
         <div
             class="feedback"
             id="f1"
@@ -364,6 +375,7 @@ h2 {
     </section>
 
 
+    <!-- QUESTION 2 -->
     <section
         class="question"
         id="q2">
@@ -388,6 +400,7 @@ h2 {
 
             </button>
 
+
             <button
                 class="option"
                 type="button"
@@ -398,6 +411,7 @@ h2 {
                 Stop evaluating and report the conflict to the Search Chair and Human Resources.
 
             </button>
+
 
             <button
                 class="option"
@@ -412,6 +426,7 @@ h2 {
 
         </div>
 
+
         <div
             class="feedback"
             id="f2"
@@ -422,6 +437,7 @@ h2 {
     </section>
 
 
+    <!-- STATUS -->
     <div class="footer">
 
         <p
@@ -432,6 +448,7 @@ h2 {
             You may revise an answer after reading the feedback.
 
         </p>
+
 
         <div class="controls">
 
@@ -808,118 +825,3 @@ h2 {
 
                     gain.gain.setValueAtTime(
                         .0001,
-                        start
-                    );
-
-                    gain.gain.exponentialRampToValueAtTime(
-                        .11,
-                        start + .01
-                    );
-
-                    gain.gain.exponentialRampToValueAtTime(
-                        .0001,
-                        start + .2
-                    );
-
-                    oscillator
-                        .connect(gain)
-                        .connect(context.destination);
-
-                    oscillator.start(start);
-
-                    oscillator.stop(
-                        start + .22
-                    );
-
-                }
-            );
-
-        } catch (error) {
-        }
-    }
-
-
-    function launchConfetti() {
-
-        if (
-            window
-                .matchMedia(
-                    '(prefers-reduced-motion: reduce)'
-                )
-                .matches
-        ) {
-            return;
-        }
-
-        const colors = [
-            '#12355b',
-            '#174d63',
-            '#2a7899',
-            '#4fb7d8',
-            '#9fe6f5',
-            '#ffffff'
-        ];
-
-        celebration.innerHTML =
-            '';
-
-        for (
-            let i = 0;
-            i < 55;
-            i++
-        ) {
-
-            const piece =
-                document.createElement(
-                    'span'
-                );
-
-            piece.className =
-                'confetti';
-
-            piece.style.left =
-                Math.random() *
-                100 +
-                'vw';
-
-            piece.style.background =
-                colors[
-                    Math.floor(
-                        Math.random() *
-                        colors.length
-                    )
-                ];
-
-            piece.style.animationDelay =
-                Math.random() *
-                .35 +
-                's';
-
-            piece.style.animationDuration =
-                1.4 +
-                Math.random() *
-                .9 +
-                's';
-
-            celebration.appendChild(
-                piece
-            );
-        }
-
-        setTimeout(
-            function () {
-                celebration.innerHTML =
-                    '';
-            },
-            2600
-        );
-    }
-
-
-    updateStatus();
-
-})();
-</script>
-
-</body>
-</html>
