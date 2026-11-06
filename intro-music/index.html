@@ -261,69 +261,64 @@ button:disabled {
 <script>
 (function () {
 
-    const nextPage =
-        "https://gfcmsu.instructure.com/courses/5243/pages/about-our-class-2?module_item_id=677112";
-
-    const intro =
-        document.getElementById("intro");
+    const continueButton =
+        document.getElementById("continueButton");
 
     const startButton =
         document.getElementById("startButton");
 
-    const continueButton =
-        document.getElementById("continueButton");
-
     const status =
         document.getElementById("status");
 
-    let audioContext;
+    const intro =
+        document.getElementById("intro");
+
     let started = false;
 
-    function playNote(
-        frequency,
-        start,
-        duration,
-        type = "square",
-        volume = 0.035
-    ) {
+    function startIntro() {
 
-        const oscillator =
-            audioContext.createOscillator();
+        if (started) {
+            return;
+        }
 
-        const gain =
-            audioContext.createGain();
+        started = true;
 
-        oscillator.type = type;
+        startButton.disabled = true;
+        startButton.textContent = "♪ Playing Intro...";
 
-        oscillator.frequency.setValueAtTime(
-            frequency,
-            start
-        );
+        status.textContent =
+            "Your training is beginning...";
 
-        gain.gain.setValueAtTime(
-            0.0001,
-            start
-        );
+        intro.classList.add("playing");
 
-        gain.gain.exponentialRampToValueAtTime(
-            volume,
-            start + 0.02
-        );
+        playTheme();
 
-        gain.gain.exponentialRampToValueAtTime(
-            0.0001,
-            start + duration
-        );
+        setTimeout(function () {
 
-        oscillator
-            .connect(gain)
-            .connect(audioContext.destination);
+            intro.classList.remove("playing");
 
-        oscillator.start(start);
+            status.textContent =
+                "Intro complete. Preparing your next step...";
 
-        oscillator.stop(
-            start + duration + 0.04
-        );
+            setTimeout(function () {
+
+                continueButton.hidden = false;
+
+                status.textContent =
+                    "Continue to Your Role on the Search Committee.";
+
+            }, 2000);
+
+        }, 10200);
+    }
+
+    startButton.addEventListener(
+        "click",
+        startIntro
+    );
+
+})();
+</script>
     }
 
     function playTheme() {
