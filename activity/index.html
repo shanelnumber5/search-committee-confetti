@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,9 +11,10 @@
 :root {
     --navy: #12355b;
     --deep: #174d63;
+    --dark: #0c3444;
     --mid: #2a7899;
     --cyan: #4fb7d8;
-    --light: #7fd4e8;
+    --light: #9fe6f5;
     --pale: #eef9fd;
     --cream: #f8fcff;
     --text: #1f2933;
@@ -41,12 +43,31 @@ body {
     padding: 20px;
 }
 
+/* MAIN 3D FRAME */
+
 .activity {
     overflow: hidden;
     background: var(--cream);
-    border: 3px solid var(--navy);
+
+    border-top: 5px solid #66c7e3;
+    border-left: 5px solid var(--cyan);
+    border-right: 6px solid var(--dark);
+    border-bottom: 8px solid var(--dark);
+
     border-radius: 6px;
-    box-shadow: 7px 7px 0 var(--deep);
+
+    box-shadow:
+        8px 8px 0 var(--navy);
+}
+
+/* TOP FRAME */
+
+.top-bevel {
+    height: 12px;
+    background: var(--cyan);
+    border-bottom: 3px solid var(--dark);
+    box-shadow:
+        inset 0 4px 0 var(--light);
 }
 
 /* HEADER */
@@ -55,7 +76,12 @@ body {
     padding: 20px 24px;
     background: var(--navy);
     color: var(--white);
-    border-bottom: 4px solid var(--cyan);
+
+    border-bottom: 4px solid var(--mid);
+
+    box-shadow:
+        inset 4px 0 0 var(--cyan),
+        inset -4px 0 0 var(--dark);
 }
 
 h1 {
@@ -94,10 +120,10 @@ h2 {
 
 .options {
     display: grid;
-    gap: 10px;
+    gap: 12px;
 }
 
-/* ANSWER BUTTONS */
+/* 3D ANSWER BUTTONS */
 
 .option,
 .smallbtn {
@@ -111,20 +137,23 @@ h2 {
     width: 100%;
     padding: 14px 16px;
     text-align: left;
+
     color: var(--navy);
     background: var(--white);
 
     border-top: 3px solid var(--light);
     border-left: 3px solid var(--cyan);
-    border-right: 3px solid var(--deep);
-    border-bottom: 4px solid var(--deep);
+    border-right: 4px solid var(--deep);
+    border-bottom: 5px solid var(--deep);
 
-    box-shadow: 4px 4px 0 #c4e8f1;
+    box-shadow:
+        4px 4px 0 #c4e8f1;
 }
 
 .option:hover,
 .option:focus-visible {
     background: var(--pale);
+
     outline: 3px solid var(--cyan);
     outline-offset: 3px;
 }
@@ -133,12 +162,13 @@ h2 {
     color: var(--white);
     background: var(--deep);
 
-    border-top-color: var(--cyan);
+    border-top-color: #66c7e3;
     border-left-color: var(--mid);
-    border-right-color: #0c3444;
-    border-bottom-color: #0c3444;
+    border-right-color: var(--dark);
+    border-bottom-color: var(--dark);
 
-    box-shadow: 4px 4px 0 var(--mid);
+    box-shadow:
+        4px 4px 0 var(--mid);
 }
 
 /* FEEDBACK */
@@ -146,8 +176,14 @@ h2 {
 .feedback {
     margin: 14px 0 0;
     padding: 13px 15px;
+
     background: var(--pale);
-    border-left: 6px solid var(--mid);
+
+    border-top: 2px solid var(--light);
+    border-left: 5px solid var(--mid);
+    border-right: 3px solid #8acada;
+    border-bottom: 4px solid #8acada;
+
     border-radius: 3px;
 }
 
@@ -159,7 +195,7 @@ h2 {
     border-left-color: var(--danger);
 }
 
-/* FOOTER / COMPLETION */
+/* COMPLETION BLOCK */
 
 .footer {
     margin: 0;
@@ -169,10 +205,12 @@ h2 {
     color: var(--white);
 
     border-top: 5px solid var(--cyan);
-    border-bottom: 7px solid #0c3444;
+    border-bottom: 5px solid var(--dark);
 
     box-shadow:
-        inset 0 4px 0 var(--light);
+        inset 0 4px 0 #66c7e3,
+        inset 4px 0 0 var(--mid),
+        inset -4px 0 0 var(--dark);
 }
 
 .footer strong {
@@ -194,17 +232,30 @@ h2 {
 
     border-top: 3px solid var(--light);
     border-left: 3px solid var(--cyan);
-    border-right: 3px solid #0c3444;
-    border-bottom: 4px solid #0c3444;
+    border-right: 4px solid var(--dark);
+    border-bottom: 5px solid var(--dark);
 
-    box-shadow: 4px 4px 0 var(--mid);
+    box-shadow:
+        4px 4px 0 var(--mid);
 }
 
 .smallbtn:hover,
 .smallbtn:focus-visible {
     background: var(--pale);
+
     outline: 3px solid var(--light);
     outline-offset: 3px;
+}
+
+/* BOTTOM FRAME */
+
+.bottom-bevel {
+    height: 12px;
+    background: #103f50;
+    border-top: 3px solid #082b37;
+
+    box-shadow:
+        inset 0 4px 0 #2c6b80;
 }
 
 /* CONFETTI */
@@ -276,6 +327,11 @@ h2 {
     class="activity"
     aria-labelledby="activity-title">
 
+    <div
+        class="top-bevel"
+        aria-hidden="true">
+    </div>
+
     <header class="head">
 
         <h1 id="activity-title">
@@ -289,7 +345,6 @@ h2 {
     </p>
 
 
-    <!-- QUESTION 1 -->
     <section
         class="question"
         id="q1">
@@ -309,9 +364,7 @@ h2 {
                 data-q="1"
                 data-correct="false"
                 aria-pressed="false">
-
                 You can confirm whether the person is a finalist, but nothing more.
-
             </button>
 
             <button
@@ -320,9 +373,7 @@ h2 {
                 data-q="1"
                 data-correct="true"
                 aria-pressed="false">
-
                 You should not share whether the person applied, advanced, or became a finalist.
-
             </button>
 
             <button
@@ -331,9 +382,7 @@ h2 {
                 data-q="1"
                 data-correct="false"
                 aria-pressed="false">
-
                 You can share the information if the coworker agrees to keep it private.
-
             </button>
 
         </div>
@@ -348,7 +397,6 @@ h2 {
     </section>
 
 
-    <!-- QUESTION 2 -->
     <section
         class="question"
         id="q2">
@@ -368,9 +416,7 @@ h2 {
                 data-q="2"
                 data-correct="false"
                 aria-pressed="false">
-
                 Continue reviewing the applicant but avoid discussing the relationship.
-
             </button>
 
             <button
@@ -379,9 +425,7 @@ h2 {
                 data-q="2"
                 data-correct="true"
                 aria-pressed="false">
-
                 Stop evaluating and report the conflict to the Search Chair and Human Resources.
-
             </button>
 
             <button
@@ -390,9 +434,7 @@ h2 {
                 data-q="2"
                 data-correct="false"
                 aria-pressed="false">
-
                 Ask the applicant whether they are comfortable with you remaining on the committee.
-
             </button>
 
         </div>
@@ -407,7 +449,6 @@ h2 {
     </section>
 
 
-    <!-- STATUS -->
     <div class="footer">
 
         <p
@@ -425,13 +466,16 @@ h2 {
                 class="smallbtn"
                 id="reset"
                 type="button">
-
                 Reset Activity
-
             </button>
 
         </div>
 
+    </div>
+
+    <div
+        class="bottom-bevel"
+        aria-hidden="true">
     </div>
 
 </section>
@@ -837,11 +881,6 @@ h2 {
             return;
         }
 
-        /*
-         * Same monochromatic family as the page,
-         * with white for contrast.
-         */
-
         const colors = [
             '#12355b',
             '#174d63',
@@ -914,3 +953,4 @@ h2 {
 
 </body>
 </html>
+```
