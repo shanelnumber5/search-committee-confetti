@@ -72,6 +72,10 @@ h2 {
 
 .controls {
     flex: 0 0 auto;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 button,
@@ -163,19 +167,40 @@ button:disabled {
 }
 
 @keyframes bounce {
-    from { height: 5px; }
-    to { height: 22px; }
+    from {
+        height: 5px;
+    }
+
+    to {
+        height: 22px;
+    }
 }
 
 @keyframes progress {
-    from { width: 0; }
-    to { width: 100%; }
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .bar,
     .progress-bar {
         animation: none !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .controls {
+        width: 100%;
+    }
+
+    button,
+    .continue-link {
+        width: 100%;
     }
 }
 </style>
@@ -220,7 +245,7 @@ button:disabled {
                 href="https://gfcmsu.instructure.com/courses/5243/pages/about-our-class-2?module_item_id=677112"
                 target="_top"
                 hidden>
-                Continue →
+                Continue to Your Role →
             </a>
 
         </div>
@@ -261,64 +286,66 @@ button:disabled {
 <script>
 (function () {
 
-    const continueButton =
-        document.getElementById("continueButton");
+    const intro =
+        document.getElementById("intro");
 
     const startButton =
         document.getElementById("startButton");
 
+    const continueButton =
+        document.getElementById("continueButton");
+
     const status =
         document.getElementById("status");
 
-    const intro =
-        document.getElementById("intro");
-
+    let audioContext = null;
     let started = false;
 
-    function startIntro() {
+    function playNote(
+        frequency,
+        start,
+        duration,
+        type = "square",
+        volume = 0.035
+    ) {
 
-        if (started) {
-            return;
-        }
+        const oscillator =
+            audioContext.createOscillator();
 
-        started = true;
+        const gain =
+            audioContext.createGain();
 
-        startButton.disabled = true;
-        startButton.textContent = "♪ Playing Intro...";
+        oscillator.type = type;
 
-        status.textContent =
-            "Your training is beginning...";
+        oscillator.frequency.setValueAtTime(
+            frequency,
+            start
+        );
 
-        intro.classList.add("playing");
+        gain.gain.setValueAtTime(
+            0.0001,
+            start
+        );
 
-        playTheme();
+        gain.gain.exponentialRampToValueAtTime(
+            volume,
+            start + 0.02
+        );
 
-        setTimeout(function () {
+        gain.gain.exponentialRampToValueAtTime(
+            0.0001,
+            start + duration
+        );
 
-            intro.classList.remove("playing");
+        oscillator
+            .connect(gain)
+            .connect(audioContext.destination);
 
-            status.textContent =
-                "Intro complete. Preparing your next step...";
+        oscillator.start(start);
 
-            setTimeout(function () {
-
-                continueButton.hidden = false;
-
-                status.textContent =
-                    "Continue to Your Role on the Search Committee.";
-
-            }, 2000);
-
-        }, 10200);
-    }
-
-    startButton.addEventListener(
-        "click",
-        startIntro
-    );
-
-})();
-</script>
+        oscillator.stop(
+            start + duration + 0.04
+        );
     }
 
     function playTheme() {
@@ -356,7 +383,7 @@ button:disabled {
             [1046.50, 9.02, .80]
         ];
 
-        melody.forEach(note => {
+        melody.forEach(function (note) {
 
             playNote(
                 note[0],
@@ -386,7 +413,7 @@ button:disabled {
             [130.81, 8.40]
         ];
 
-        bass.forEach(note => {
+        bass.forEach(function (note) {
 
             playNote(
                 note[0],
@@ -395,10 +422,9 @@ button:disabled {
                 "triangle",
                 .05
             );
-
         });
 
-        const arp = [
+        const arpeggio = [
             261.63,
             329.63,
             392.00,
@@ -408,55 +434,41 @@ button:disabled {
         for (let i = 0; i < 32; i++) {
 
             playNote(
-                arp[i % 4],
+                arpeggio[i % 4],
                 now + i * .30,
                 .18,
                 "sine",
                 .026
             );
         }
-    }
-
-    function attemptNavigation() {
-
-        status.textContent =
-            "Loading Your Role on the Search Committee...";
-
-        continueButton.hidden =
-            false;
 
         /*
-         * Try to navigate the full Canvas window.
-         * Browser security may prevent an external
-         * iframe from doing this automatically.
+         * Final little "quest accepted" chord.
          */
 
-        try {
+        playNote(
+            523.25,
+            now + 9.35,
+            .55,
+            "sine",
+            .04
+        );
 
-            window.top.location.href =
-                nextPage;
+        playNote(
+            659.25,
+            now + 9.47,
+            .55,
+            "sine",
+            .04
+        );
 
-        } catch (error) {
-
-            status.textContent =
-                "Intro complete. Select Continue to move to the next page.";
-
-        }
-
-        /*
-         * If automatic navigation was blocked,
-         * leave the manual button visible.
-         */
-
-        setTimeout(function () {
-
-            continueButton.hidden =
-                false;
-
-            status.textContent =
-                "Intro complete. Continue to Your Role on the Search Committee.";
-
-        }, 1500);
+        playNote(
+            783.99,
+            now + 9.59,
+            .75,
+            "sine",
+            .04
+        );
     }
 
     function startIntro() {
@@ -467,8 +479,7 @@ button:disabled {
 
         started = true;
 
-        startButton.disabled =
-            true;
+        startButton.disabled = true;
 
         startButton.textContent =
             "♪ Playing Intro...";
@@ -483,7 +494,7 @@ button:disabled {
         playTheme();
 
         /*
-         * Music lasts approximately 10 seconds.
+         * Music runs for approximately 10 seconds.
          */
 
         setTimeout(function () {
@@ -493,16 +504,25 @@ button:disabled {
             );
 
             status.textContent =
-                "Intro complete. Preparing the next page...";
+                "Intro complete. Preparing your next step...";
 
             /*
-             * Pause for two seconds after the music.
+             * Give the learner a short pause
+             * before presenting Continue.
              */
 
-            setTimeout(
-                attemptNavigation,
-                2000
-            );
+            setTimeout(function () {
+
+                startButton.hidden = true;
+
+                continueButton.hidden = false;
+
+                status.textContent =
+                    "Continue to Your Role on the Search Committee.";
+
+                continueButton.focus();
+
+            }, 2000);
 
         }, 10200);
     }
