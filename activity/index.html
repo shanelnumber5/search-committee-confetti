@@ -9,11 +9,14 @@
 <style>
 :root {
     --navy: #12355b;
-    --blue: #0b568f;
-    --gold: #f2c14e;
+    --deep: #174d63;
+    --mid: #2a7899;
+    --cyan: #4fb7d8;
+    --light: #7fd4e8;
+    --pale: #eef9fd;
+    --cream: #f8fcff;
     --text: #1f2933;
-    --pale: #f3f7fa;
-    --line: #c8d2dc;
+    --line: #b8dce8;
     --success: #176b46;
     --danger: #8c2f39;
     --white: #ffffff;
@@ -27,7 +30,7 @@ body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--text);
-    background: var(--white);
+    background: transparent;
     font-size: 16px;
     line-height: 1.55;
 }
@@ -39,55 +42,53 @@ body {
 }
 
 .activity {
-    border: 0;
-    border-radius: 0;
-    overflow: visible;
-    background: var(--white);
+    overflow: hidden;
+    background: var(--cream);
+    border: 3px solid var(--navy);
+    border-radius: 6px;
+    box-shadow: 7px 7px 0 var(--deep);
 }
+
+/* HEADER */
 
 .head {
-    padding: 18px 22px;
+    padding: 20px 24px;
     background: var(--navy);
     color: var(--white);
-    border-left: 7px solid var(--gold);
-}
-
-.eyebrow {
-    margin: 0 0 4px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .05em;
+    border-bottom: 4px solid var(--cyan);
 }
 
 h1 {
     margin: 0;
     color: var(--white);
-    font-size: 24px;
+    font-size: 26px;
+    font-weight: 800;
     line-height: 1.25;
 }
 
 .intro {
     margin: 0;
-    padding: 18px 22px 6px;
+    padding: 20px 24px;
+    background: var(--pale);
+    border-bottom: 3px solid var(--line);
 }
+
+/* QUESTIONS */
 
 .question {
-    margin: 12px 22px 0;
-    padding: 20px 0 0;
-    border-top: 1px solid var(--line);
+    margin: 0 24px;
+    padding: 26px 0;
 }
 
-.qnum {
-    margin: 0 0 4px;
-    color: var(--blue);
-    font-size: 13px;
-    font-weight: 700;
+.question + .question {
+    border-top: 3px solid var(--line);
 }
 
 h2 {
-    margin: 0 0 10px;
+    margin: 0 0 16px;
     color: var(--navy);
-    font-size: 20px;
+    font-size: 21px;
+    font-weight: 800;
     line-height: 1.35;
 }
 
@@ -96,46 +97,58 @@ h2 {
     gap: 10px;
 }
 
+/* ANSWER BUTTONS */
+
 .option,
 .smallbtn {
     font: inherit;
     font-weight: 700;
     cursor: pointer;
-    border: 2px solid var(--navy);
     border-radius: 5px;
-    background: var(--white);
-    color: var(--navy);
 }
 
 .option {
     width: 100%;
-    padding: 13px 15px;
+    padding: 14px 16px;
     text-align: left;
-}
+    color: var(--navy);
+    background: var(--white);
 
-.smallbtn {
-    padding: 9px 12px;
+    border-top: 3px solid var(--light);
+    border-left: 3px solid var(--cyan);
+    border-right: 3px solid var(--deep);
+    border-bottom: 4px solid var(--deep);
+
+    box-shadow: 4px 4px 0 #c4e8f1;
 }
 
 .option:hover,
-.option:focus-visible,
-.smallbtn:hover,
-.smallbtn:focus-visible {
+.option:focus-visible {
     background: var(--pale);
-    outline: 3px solid var(--gold);
-    outline-offset: 2px;
+    outline: 3px solid var(--cyan);
+    outline-offset: 3px;
 }
 
 .option[aria-pressed="true"] {
-    background: var(--navy);
     color: var(--white);
+    background: var(--deep);
+
+    border-top-color: var(--cyan);
+    border-left-color: var(--mid);
+    border-right-color: #0c3444;
+    border-bottom-color: #0c3444;
+
+    box-shadow: 4px 4px 0 var(--mid);
 }
 
+/* FEEDBACK */
+
 .feedback {
-    margin: 12px 0 0;
-    padding: 12px 14px;
+    margin: 14px 0 0;
+    padding: 13px 15px;
     background: var(--pale);
-    border-left: 5px solid var(--navy);
+    border-left: 6px solid var(--mid);
+    border-radius: 3px;
 }
 
 .feedback.good {
@@ -146,11 +159,24 @@ h2 {
     border-left-color: var(--danger);
 }
 
+/* FOOTER / COMPLETION */
+
 .footer {
-    margin: 22px;
-    padding: 18px 20px;
-    background: var(--pale);
-    border-left: 6px solid var(--navy);
+    margin: 0;
+    padding: 20px 24px;
+
+    background: var(--deep);
+    color: var(--white);
+
+    border-top: 5px solid var(--cyan);
+    border-bottom: 7px solid #0c3444;
+
+    box-shadow:
+        inset 0 4px 0 var(--light);
+}
+
+.footer strong {
+    color: var(--white);
 }
 
 .controls {
@@ -159,6 +185,29 @@ h2 {
     gap: 10px;
     margin-top: 14px;
 }
+
+.smallbtn {
+    padding: 10px 14px;
+
+    color: var(--navy);
+    background: var(--white);
+
+    border-top: 3px solid var(--light);
+    border-left: 3px solid var(--cyan);
+    border-right: 3px solid #0c3444;
+    border-bottom: 4px solid #0c3444;
+
+    box-shadow: 4px 4px 0 var(--mid);
+}
+
+.smallbtn:hover,
+.smallbtn:focus-visible {
+    background: var(--pale);
+    outline: 3px solid var(--light);
+    outline-offset: 3px;
+}
+
+/* CONFETTI */
 
 .celebration {
     position: fixed;
@@ -191,6 +240,7 @@ h2 {
 }
 
 @media (max-width: 700px) {
+
     .wrap {
         padding: 12px;
     }
@@ -208,7 +258,7 @@ h2 {
     }
 
     h1 {
-        font-size: 22px;
+        font-size: 23px;
     }
 
     h2 {
@@ -222,119 +272,179 @@ h2 {
 
 <main class="wrap">
 
-<section class="activity" aria-labelledby="activity-title">
+<section
+    class="activity"
+    aria-labelledby="activity-title">
 
-<header class="head">
-        <h1 id="activity-title">Confidentiality &amp; Conflicts of Interest</h1>
-</header>
+    <header class="head">
 
-<p class="intro">
-    Choose the best response for both situations. Both answers must be correct to complete the activity.
-</p>
+        <h1 id="activity-title">
+            Confidentiality &amp; Conflicts of Interest
+        </h1>
 
-<section class="question" id="q1">
+    </header>
 
-    <p class="qnum">QUESTION 1</p>
-
-    <h2>
-        A coworker asks whether someone they know made the finalist list.
-    </h2>
-
-    <div class="options" role="group" aria-label="Question 1 answer choices">
-
-        <button class="option"
-                type="button"
-                data-q="1"
-                data-correct="false"
-                aria-pressed="false">
-            You can confirm whether the person is a finalist, but nothing more.
-        </button>
-
-        <button class="option"
-                type="button"
-                data-q="1"
-                data-correct="true"
-                aria-pressed="false">
-            You should not share whether the person applied, advanced, or became a finalist.
-        </button>
-
-        <button class="option"
-                type="button"
-                data-q="1"
-                data-correct="false"
-                aria-pressed="false">
-            You can share the information if the coworker agrees to keep it private.
-        </button>
-
-    </div>
-
-    <div class="feedback" id="f1" aria-live="polite" hidden></div>
-
-</section>
-
-<section class="question" id="q2">
-
-    <p class="qnum">QUESTION 2</p>
-
-    <h2>
-        You recognize your sibling's partner in the applicant pool.
-    </h2>
-
-    <div class="options" role="group" aria-label="Question 2 answer choices">
-
-        <button class="option"
-                type="button"
-                data-q="2"
-                data-correct="false"
-                aria-pressed="false">
-            Continue reviewing the applicant but avoid discussing the relationship.
-        </button>
-
-        <button class="option"
-                type="button"
-                data-q="2"
-                data-correct="true"
-                aria-pressed="false">
-            Stop evaluating and report the conflict to the Search Chair and Human Resources.
-        </button>
-
-        <button class="option"
-                type="button"
-                data-q="2"
-                data-correct="false"
-                aria-pressed="false">
-            Ask the applicant whether they are comfortable with you remaining on the committee.
-        </button>
-
-    </div>
-
-    <div class="feedback" id="f2" aria-live="polite" hidden></div>
-
-</section>
-
-<div class="footer">
-
-    <p id="status" style="margin: 0;">
-        <strong>Complete both questions.</strong>
-        You may revise an answer after reading the feedback.
+    <p class="intro">
+        Choose the best response for both situations. Both answers must be correct to complete the activity.
     </p>
 
-    <div class="controls">
-        <button class="smallbtn"
+
+    <!-- QUESTION 1 -->
+    <section
+        class="question"
+        id="q1">
+
+        <h2>
+            Question 1: A coworker asks whether someone they know made the finalist list.
+        </h2>
+
+        <div
+            class="options"
+            role="group"
+            aria-label="Question 1 answer choices">
+
+            <button
+                class="option"
+                type="button"
+                data-q="1"
+                data-correct="false"
+                aria-pressed="false">
+
+                You can confirm whether the person is a finalist, but nothing more.
+
+            </button>
+
+            <button
+                class="option"
+                type="button"
+                data-q="1"
+                data-correct="true"
+                aria-pressed="false">
+
+                You should not share whether the person applied, advanced, or became a finalist.
+
+            </button>
+
+            <button
+                class="option"
+                type="button"
+                data-q="1"
+                data-correct="false"
+                aria-pressed="false">
+
+                You can share the information if the coworker agrees to keep it private.
+
+            </button>
+
+        </div>
+
+        <div
+            class="feedback"
+            id="f1"
+            aria-live="polite"
+            hidden>
+        </div>
+
+    </section>
+
+
+    <!-- QUESTION 2 -->
+    <section
+        class="question"
+        id="q2">
+
+        <h2>
+            Question 2: You recognize your sibling's partner in the applicant pool.
+        </h2>
+
+        <div
+            class="options"
+            role="group"
+            aria-label="Question 2 answer choices">
+
+            <button
+                class="option"
+                type="button"
+                data-q="2"
+                data-correct="false"
+                aria-pressed="false">
+
+                Continue reviewing the applicant but avoid discussing the relationship.
+
+            </button>
+
+            <button
+                class="option"
+                type="button"
+                data-q="2"
+                data-correct="true"
+                aria-pressed="false">
+
+                Stop evaluating and report the conflict to the Search Chair and Human Resources.
+
+            </button>
+
+            <button
+                class="option"
+                type="button"
+                data-q="2"
+                data-correct="false"
+                aria-pressed="false">
+
+                Ask the applicant whether they are comfortable with you remaining on the committee.
+
+            </button>
+
+        </div>
+
+        <div
+            class="feedback"
+            id="f2"
+            aria-live="polite"
+            hidden>
+        </div>
+
+    </section>
+
+
+    <!-- STATUS -->
+    <div class="footer">
+
+        <p
+            id="status"
+            style="margin: 0;">
+
+            <strong>Complete both questions.</strong>
+            You may revise an answer after reading the feedback.
+
+        </p>
+
+        <div class="controls">
+
+            <button
+                class="smallbtn"
                 id="reset"
                 type="button">
-            Reset activity
-        </button>
+
+                Reset Activity
+
+            </button>
+
+        </div>
+
     </div>
 
-</div>
-
 </section>
+
 </main>
 
-<div class="celebration"
-     id="celebration"
-     aria-hidden="true"></div>
+
+<div
+    class="celebration"
+    id="celebration"
+    aria-hidden="true">
+</div>
+
 
 <script>
 (function () {
@@ -360,6 +470,7 @@ h2 {
         1: {
             good:
                 '<strong>Correct.</strong> Candidate status and committee deliberations stay within the official search process.',
+
             bad:
                 '<strong>Not quite.</strong> Do not share whether a candidate applied, advanced, or was selected as a finalist.'
         },
@@ -367,10 +478,12 @@ h2 {
         2: {
             good:
                 '<strong>Correct.</strong> Stop evaluating and report the conflict to the Search Chair and Human Resources.',
+
             bad:
                 '<strong>Not quite.</strong> A family or partner connection requires you to stop evaluating and report the conflict.'
         }
     };
+
 
     function updateStatus() {
 
@@ -392,7 +505,6 @@ h2 {
                 celebrated = true;
 
                 launchConfetti();
-
                 playSuccessChime();
             }
 
@@ -408,68 +520,76 @@ h2 {
         }
     }
 
+
     document
         .querySelectorAll('.option')
         .forEach(function (button) {
 
-            button.addEventListener('click', function () {
+            button.addEventListener(
+                'click',
+                function () {
 
-                const question =
-                    Number(button.dataset.q);
+                    const question =
+                        Number(button.dataset.q);
 
-                const correct =
-                    button.dataset.correct === 'true';
+                    const correct =
+                        button.dataset.correct === 'true';
 
-                answers[question] =
-                    correct;
+                    answers[question] =
+                        correct;
 
-                document
-                    .querySelectorAll(
-                        '[data-q="' +
-                        question +
-                        '"]'
-                    )
-                    .forEach(function (choice) {
+                    document
+                        .querySelectorAll(
+                            '[data-q="' +
+                            question +
+                            '"]'
+                        )
+                        .forEach(
+                            function (choice) {
 
-                        choice.setAttribute(
-                            'aria-pressed',
-                            choice === button
-                                ? 'true'
-                                : 'false'
+                                choice.setAttribute(
+                                    'aria-pressed',
+                                    choice === button
+                                        ? 'true'
+                                        : 'false'
+                                );
+
+                            }
                         );
 
-                    });
+                    const response =
+                        document.getElementById(
+                            'f' + question
+                        );
 
-                const response =
-                    document.getElementById(
-                        'f' + question
-                    );
+                    response.hidden =
+                        false;
 
-                response.hidden =
-                    false;
+                    response.className =
+                        'feedback ' +
+                        (
+                            correct
+                                ? 'good'
+                                : 'bad'
+                        );
 
-                response.className =
-                    'feedback ' +
-                    (correct
-                        ? 'good'
-                        : 'bad');
+                    response.innerHTML =
+                        correct
+                            ? feedback[question].good
+                            : feedback[question].bad;
 
-                response.innerHTML =
-                    correct
-                        ? feedback[question].good
-                        : feedback[question].bad;
+                    if (correct) {
+                        playCorrectSound();
+                    } else {
+                        playIncorrectSound();
+                    }
 
-                if (correct) {
-                    playCorrectSound();
-                } else {
-                    playIncorrectSound();
+                    updateStatus();
                 }
-
-                updateStatus();
-
-            });
+            );
 
         });
+
 
     reset.addEventListener(
         'click',
@@ -482,14 +602,16 @@ h2 {
 
             document
                 .querySelectorAll('.option')
-                .forEach(function (button) {
+                .forEach(
+                    function (button) {
 
-                    button.setAttribute(
-                        'aria-pressed',
-                        'false'
-                    );
+                        button.setAttribute(
+                            'aria-pressed',
+                            'false'
+                        );
 
-                });
+                    }
+                );
 
             [1, 2].forEach(
                 function (question) {
@@ -507,7 +629,6 @@ h2 {
 
                     response.className =
                         'feedback';
-
                 }
             );
 
@@ -519,9 +640,9 @@ h2 {
             document
                 .querySelector('#q1 .option')
                 .focus();
-
         }
     );
+
 
     function createAudioContext() {
 
@@ -531,6 +652,7 @@ h2 {
 
         return new AudioContext();
     }
+
 
     function playCorrectSound() {
 
@@ -583,6 +705,7 @@ h2 {
         }
     }
 
+
     function playIncorrectSound() {
 
         try {
@@ -633,6 +756,7 @@ h2 {
         } catch (error) {
         }
     }
+
 
     function playSuccessChime() {
 
@@ -700,6 +824,7 @@ h2 {
         }
     }
 
+
     function launchConfetti() {
 
         if (
@@ -712,12 +837,18 @@ h2 {
             return;
         }
 
+        /*
+         * Same monochromatic family as the page,
+         * with white for contrast.
+         */
+
         const colors = [
             '#12355b',
-            '#0b568f',
-            '#f2c14e',
-            '#176b46',
-            '#8c2f39'
+            '#174d63',
+            '#2a7899',
+            '#4fb7d8',
+            '#7fd4e8',
+            '#ffffff'
         ];
 
         celebration.innerHTML =
@@ -774,6 +905,7 @@ h2 {
             2600
         );
     }
+
 
     updateStatus();
 
