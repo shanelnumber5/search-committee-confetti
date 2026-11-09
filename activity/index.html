@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="en">
+
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Confidentiality & Conflict of Interest Check</title>
+<title>Confidentiality & Conflicts of Interest</title>
 
 <style>
 :root {
@@ -13,12 +14,12 @@
     --deep: #174d63;
     --dark: #0c3444;
     --mid: #2a7899;
-    --cyan: #4fb7d8;
-    --light: #9fe6f5;
+    --blue: #4fb7d8;
+    --light: #7fd4e8;
+    --highlight: #9fe6f5;
 
-    --pale: #e8f6fb;
-    --pale2: #f3fbfe;
-    --line: #9ccfdd;
+    --pale: #eaf7fb;
+    --pale2: #f6fcff;
 
     --text: #1f2933;
     --white: #ffffff;
@@ -51,7 +52,10 @@ body {
     margin: 0;
 }
 
-/* TITLE BAR */
+
+/* =========================================================
+   TITLE
+========================================================= */
 
 .head {
     margin: 0 0 18px;
@@ -60,8 +64,8 @@ body {
     background: var(--deep);
     color: var(--white);
 
-    border-top: 4px solid #66c7e3;
-    border-left: 4px solid var(--cyan);
+    border-top: 4px solid var(--light);
+    border-left: 4px solid var(--blue);
     border-right: 5px solid var(--dark);
     border-bottom: 6px solid var(--dark);
 
@@ -83,7 +87,10 @@ h1 {
     padding: 0 4px;
 }
 
-/* QUESTIONS */
+
+/* =========================================================
+   QUESTIONS
+========================================================= */
 
 .question {
     margin: 0 0 28px;
@@ -91,14 +98,14 @@ h1 {
 
     background: var(--pale2);
 
-    border-top: 3px solid var(--light);
-    border-left: 3px solid var(--cyan);
-    border-right: 4px solid #2d7086;
-    border-bottom: 5px solid #2d7086;
+    border-top: 3px solid var(--highlight);
+    border-left: 3px solid var(--light);
+    border-right: 4px solid var(--mid);
+    border-bottom: 5px solid var(--mid);
 
     border-radius: 5px;
 
-    box-shadow: 5px 5px 0 #b8dfe8;
+    box-shadow: 5px 5px 0 #c3dfe9;
 }
 
 h2 {
@@ -109,12 +116,34 @@ h2 {
     line-height: 1.35;
 }
 
+
+/* =========================================================
+   SCENARIO
+========================================================= */
+
+.case {
+    margin: 0 0 18px;
+    padding: 16px 18px;
+
+    background: #e5f4f8;
+
+    border-top: 3px solid #d6f0f6;
+    border-left: 5px solid var(--mid);
+    border-right: 3px solid #91c6d7;
+    border-bottom: 4px solid #91c6d7;
+
+    border-radius: 4px;
+}
+
+
+/* =========================================================
+   ANSWERS
+========================================================= */
+
 .options {
     display: grid;
     gap: 12px;
 }
-
-/* ANSWER BUTTONS */
 
 .option {
     width: 100%;
@@ -129,21 +158,23 @@ h2 {
     color: var(--navy);
     background: var(--white);
 
-    border-top: 3px solid #d6f2f8;
-    border-left: 3px solid #8ed9e9;
-    border-right: 4px solid #347b91;
-    border-bottom: 5px solid #347b91;
+    border-top: 3px solid #effcff;
+    border-left: 3px solid var(--light);
+    border-right: 4px solid var(--mid);
+    border-bottom: 5px solid var(--mid);
 
     border-radius: 5px;
 
-    box-shadow: 4px 4px 0 #bddfe7;
+    box-shadow: 4px 4px 0 #c4dfe8;
 }
 
-.option:hover,
-.option:focus-visible {
-    background: #eaf8fc;
+.option:hover {
+    background: #edf9fc;
+}
 
-    outline: 3px solid var(--cyan);
+.option:focus-visible {
+    background: #edf9fc;
+    outline: 3px solid var(--blue);
     outline-offset: 3px;
 }
 
@@ -151,21 +182,24 @@ h2 {
     color: var(--white);
     background: var(--deep);
 
-    border-top-color: #66c7e3;
-    border-left-color: var(--cyan);
+    border-top-color: var(--light);
+    border-left-color: var(--blue);
     border-right-color: var(--dark);
     border-bottom-color: var(--dark);
 
     box-shadow: 4px 4px 0 var(--mid);
 }
 
-/* FEEDBACK */
+
+/* =========================================================
+   FEEDBACK
+========================================================= */
 
 .feedback {
     margin: 16px 0 0;
     padding: 13px 15px;
 
-    background: #dff1f6;
+    background: #e5f4f8;
 
     border-left: 6px solid var(--mid);
     border-radius: 3px;
@@ -179,7 +213,10 @@ h2 {
     border-left-color: var(--danger);
 }
 
-/* COMPLETION */
+
+/* =========================================================
+   COMPLETION
+========================================================= */
 
 .footer {
     margin: 4px 0 0;
@@ -188,8 +225,8 @@ h2 {
     color: var(--white);
     background: var(--deep);
 
-    border-top: 4px solid #66c7e3;
-    border-left: 4px solid var(--cyan);
+    border-top: 4px solid var(--light);
+    border-left: 4px solid var(--blue);
     border-right: 5px solid var(--dark);
     border-bottom: 6px solid var(--dark);
 
@@ -217,8 +254,8 @@ h2 {
     color: var(--navy);
     background: var(--white);
 
-    border-top: 3px solid var(--light);
-    border-left: 3px solid var(--cyan);
+    border-top: 3px solid var(--highlight);
+    border-left: 3px solid var(--light);
     border-right: 4px solid var(--dark);
     border-bottom: 5px solid var(--dark);
 
@@ -227,15 +264,20 @@ h2 {
     box-shadow: 4px 4px 0 var(--mid);
 }
 
-.smallbtn:hover,
-.smallbtn:focus-visible {
-    background: var(--pale);
+.smallbtn:hover {
+    background: #edf9fc;
+}
 
+.smallbtn:focus-visible {
+    background: #edf9fc;
     outline: 3px solid var(--light);
     outline-offset: 3px;
 }
 
-/* CONFETTI */
+
+/* =========================================================
+   CONFETTI
+========================================================= */
 
 .celebration {
     position: fixed;
@@ -248,9 +290,12 @@ h2 {
 .confetti {
     position: absolute;
     top: -20px;
+
     width: 10px;
     height: 18px;
+
     opacity: .95;
+
     animation: fall 1.8s linear forwards;
 }
 
@@ -291,6 +336,7 @@ h2 {
 </style>
 </head>
 
+
 <body>
 
 <main class="wrap">
@@ -299,6 +345,10 @@ h2 {
     class="activity"
     aria-labelledby="activity-title">
 
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
     <header class="head">
 
         <h1 id="activity-title">
@@ -307,12 +357,15 @@ h2 {
 
     </header>
 
+
     <p class="intro">
         Choose the best response for both situations. Both answers must be correct to complete the activity.
     </p>
 
 
-    <!-- QUESTION 1 -->
+    <!-- =====================================================
+         QUESTION 1
+    ====================================================== -->
     <section
         class="question"
         id="q1">
@@ -320,6 +373,10 @@ h2 {
         <h2>
             Question 1: A coworker asks whether someone they know made the finalist list.
         </h2>
+
+        <div class="case">
+            The coworker is not part of the search committee and asks you privately whether the person advanced.
+        </div>
 
         <div
             class="options"
@@ -337,7 +394,6 @@ h2 {
 
             </button>
 
-
             <button
                 class="option"
                 type="button"
@@ -348,7 +404,6 @@ h2 {
                 You should not share whether the person applied, advanced, or became a finalist.
 
             </button>
-
 
             <button
                 class="option"
@@ -363,7 +418,6 @@ h2 {
 
         </div>
 
-
         <div
             class="feedback"
             id="f1"
@@ -374,7 +428,9 @@ h2 {
     </section>
 
 
-    <!-- QUESTION 2 -->
+    <!-- =====================================================
+         QUESTION 2
+    ====================================================== -->
     <section
         class="question"
         id="q2">
@@ -382,6 +438,10 @@ h2 {
         <h2>
             Question 2: You recognize your sibling's partner in the applicant pool.
         </h2>
+
+        <div class="case">
+            You have already been assigned to review the applicant's materials.
+        </div>
 
         <div
             class="options"
@@ -399,7 +459,6 @@ h2 {
 
             </button>
 
-
             <button
                 class="option"
                 type="button"
@@ -410,7 +469,6 @@ h2 {
                 Stop evaluating and report the conflict to the Search Chair and Human Resources.
 
             </button>
-
 
             <button
                 class="option"
@@ -425,7 +483,6 @@ h2 {
 
         </div>
 
-
         <div
             class="feedback"
             id="f2"
@@ -436,7 +493,9 @@ h2 {
     </section>
 
 
-    <!-- STATUS -->
+    <!-- =====================================================
+         STATUS
+    ====================================================== -->
     <div class="footer">
 
         <p
@@ -447,7 +506,6 @@ h2 {
             You may revise an answer after reading the feedback.
 
         </p>
-
 
         <div class="controls">
 
@@ -479,6 +537,8 @@ h2 {
 <script>
 (function () {
 
+    "use strict";
+
     const answers = {
         1: null,
         2: null
@@ -487,31 +547,33 @@ h2 {
     let celebrated = false;
 
     const status =
-        document.getElementById('status');
+        document.getElementById("status");
 
-    const reset =
-        document.getElementById('reset');
+    const resetButton =
+        document.getElementById("reset");
 
     const celebration =
-        document.getElementById('celebration');
+        document.getElementById("celebration");
+
 
     const feedback = {
 
         1: {
             good:
-                '<strong>Correct.</strong> Candidate status and committee deliberations stay within the official search process.',
+                "<strong>Correct.</strong> Candidate status and committee deliberations stay within the official search process.",
 
             bad:
-                '<strong>Not quite.</strong> Do not share whether a candidate applied, advanced, or was selected as a finalist.'
+                "<strong>Not quite.</strong> Do not share whether a candidate applied, advanced, or was selected as a finalist."
         },
 
         2: {
             good:
-                '<strong>Correct.</strong> Stop evaluating and report the conflict to the Search Chair and Human Resources.',
+                "<strong>Correct.</strong> Stop evaluating and report the conflict to the Search Chair and Human Resources.",
 
             bad:
-                '<strong>Not quite.</strong> A family or partner connection requires you to stop evaluating and report the conflict.'
+                "<strong>Not quite.</strong> A family or partner connection requires you to stop evaluating and report the conflict."
         }
+
     };
 
 
@@ -525,10 +587,11 @@ h2 {
             answers[1] === true &&
             answers[2] === true;
 
+
         if (allCorrect) {
 
             status.innerHTML =
-                '<strong>Both answers are correct.</strong> You identified the key confidentiality and conflict-of-interest decisions.';
+                "<strong>Both answers are correct.</strong> You identified the key confidentiality and conflict-of-interest decisions.";
 
             if (!celebrated) {
 
@@ -538,253 +601,303 @@ h2 {
                 playSuccessChime();
             }
 
-        } else if (complete) {
-
-            status.innerHTML =
-                '<strong>One or more answers needs another look.</strong> Review the feedback and try again.';
-
-        } else {
-
-            status.innerHTML =
-                '<strong>Complete both questions.</strong> You may revise an answer after reading the feedback.';
+            return;
         }
+
+
+        if (complete) {
+
+            status.innerHTML =
+                "<strong>One or more answers needs another look.</strong> Review the feedback and try again.";
+
+            return;
+        }
+
+
+        status.innerHTML =
+            "<strong>Complete both questions.</strong> You may revise an answer after reading the feedback.";
+    }
+
+
+    function handleAnswer(button) {
+
+        const question =
+            Number(
+                button.getAttribute("data-q")
+            );
+
+        const correct =
+            button.getAttribute("data-correct") ===
+            "true";
+
+
+        answers[question] =
+            correct;
+
+
+        const choices =
+            document.querySelectorAll(
+                '[data-q="' +
+                question +
+                '"]'
+            );
+
+
+        choices.forEach(
+            function (choice) {
+
+                choice.setAttribute(
+                    "aria-pressed",
+                    choice === button
+                        ? "true"
+                        : "false"
+                );
+
+            }
+        );
+
+
+        const response =
+            document.getElementById(
+                "f" + question
+            );
+
+
+        if (!response) {
+            return;
+        }
+
+
+        response.hidden =
+            false;
+
+
+        response.className =
+            correct
+                ? "feedback good"
+                : "feedback bad";
+
+
+        response.innerHTML =
+            correct
+                ? feedback[question].good
+                : feedback[question].bad;
+
+
+        if (correct) {
+            playCorrectSound();
+        } else {
+            playIncorrectSound();
+        }
+
+
+        updateStatus();
     }
 
 
     document
-        .querySelectorAll('.option')
-        .forEach(function (button) {
+        .querySelectorAll(".option")
+        .forEach(
+            function (button) {
 
-            button.addEventListener(
-                'click',
-                function () {
-
-                    const question =
-                        Number(button.dataset.q);
-
-                    const correct =
-                        button.dataset.correct === 'true';
-
-                    answers[question] =
-                        correct;
-
-                    document
-                        .querySelectorAll(
-                            '[data-q="' +
-                            question +
-                            '"]'
-                        )
-                        .forEach(
-                            function (choice) {
-
-                                choice.setAttribute(
-                                    'aria-pressed',
-                                    choice === button
-                                        ? 'true'
-                                        : 'false'
-                                );
-
-                            }
-                        );
-
-                    const response =
-                        document.getElementById(
-                            'f' + question
-                        );
-
-                    response.hidden =
-                        false;
-
-                    response.className =
-                        'feedback ' +
-                        (
-                            correct
-                                ? 'good'
-                                : 'bad'
-                        );
-
-                    response.innerHTML =
-                        correct
-                            ? feedback[question].good
-                            : feedback[question].bad;
-
-                    if (correct) {
-                        playCorrectSound();
-                    } else {
-                        playIncorrectSound();
+                button.addEventListener(
+                    "click",
+                    function () {
+                        handleAnswer(button);
                     }
+                );
 
-                    updateStatus();
-                }
-            );
-
-        });
+            }
+        );
 
 
-    reset.addEventListener(
-        'click',
+    resetButton.addEventListener(
+        "click",
         function () {
 
-            answers[1] = null;
-            answers[2] = null;
+            answers[1] =
+                null;
 
-            celebrated = false;
+            answers[2] =
+                null;
+
+            celebrated =
+                false;
+
 
             document
-                .querySelectorAll('.option')
+                .querySelectorAll(".option")
                 .forEach(
                     function (button) {
 
                         button.setAttribute(
-                            'aria-pressed',
-                            'false'
+                            "aria-pressed",
+                            "false"
                         );
 
                     }
                 );
+
 
             [1, 2].forEach(
                 function (question) {
 
                     const response =
                         document.getElementById(
-                            'f' + question
+                            "f" + question
                         );
 
-                    response.hidden =
-                        true;
+                    if (response) {
 
-                    response.textContent =
-                        '';
+                        response.hidden =
+                            true;
 
-                    response.className =
-                        'feedback';
+                        response.innerHTML =
+                            "";
+
+                        response.className =
+                            "feedback";
+                    }
+
                 }
             );
 
+
             celebration.innerHTML =
-                '';
+                "";
+
 
             updateStatus();
 
-            document
-                .querySelector('#q1 .option')
-                .focus();
+
+            const firstButton =
+                document.querySelector(
+                    "#q1 .option"
+                );
+
+            if (firstButton) {
+                firstButton.focus();
+            }
+
         }
     );
 
 
     function createAudioContext() {
 
-        const AudioContext =
+        const AudioContextClass =
             window.AudioContext ||
             window.webkitAudioContext;
 
-        return new AudioContext();
+
+        if (!AudioContextClass) {
+            return null;
+        }
+
+
+        return new AudioContextClass();
+    }
+
+
+    function playTone(
+        frequency,
+        type,
+        volume,
+        duration
+    ) {
+
+        try {
+
+            const context =
+                createAudioContext();
+
+
+            if (!context) {
+                return;
+            }
+
+
+            const now =
+                context.currentTime;
+
+            const oscillator =
+                context.createOscillator();
+
+            const gain =
+                context.createGain();
+
+
+            oscillator.type =
+                type;
+
+            oscillator.frequency.value =
+                frequency;
+
+
+            gain.gain.setValueAtTime(
+                0.0001,
+                now
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                volume,
+                now + 0.01
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                0.0001,
+                now + duration
+            );
+
+
+            oscillator
+                .connect(gain)
+                .connect(context.destination);
+
+
+            oscillator.start(now);
+
+            oscillator.stop(
+                now + duration + 0.02
+            );
+
+
+            oscillator.addEventListener(
+                "ended",
+                function () {
+                    context.close();
+                }
+            );
+
+        } catch (error) {
+
+            /* Audio is optional.
+               Quiz interaction should continue
+               even when the browser blocks sound. */
+
+        }
     }
 
 
     function playCorrectSound() {
 
-        try {
-
-            const context =
-                createAudioContext();
-
-            const now =
-                context.currentTime;
-
-            const oscillator =
-                context.createOscillator();
-
-            const gain =
-                context.createGain();
-
-            oscillator.type =
-                'sine';
-
-            oscillator.frequency.value =
-                660;
-
-            gain.gain.setValueAtTime(
-                .0001,
-                now
-            );
-
-            gain.gain.exponentialRampToValueAtTime(
-                .09,
-                now + .01
-            );
-
-            gain.gain.exponentialRampToValueAtTime(
-                .0001,
-                now + .16
-            );
-
-            oscillator
-                .connect(gain)
-                .connect(context.destination);
-
-            oscillator.start(now);
-
-            oscillator.stop(
-                now + .18
-            );
-
-        } catch (error) {
-        }
+        playTone(
+            660,
+            "sine",
+            0.09,
+            0.16
+        );
     }
 
 
     function playIncorrectSound() {
 
-        try {
-
-            const context =
-                createAudioContext();
-
-            const now =
-                context.currentTime;
-
-            const oscillator =
-                context.createOscillator();
-
-            const gain =
-                context.createGain();
-
-            oscillator.type =
-                'triangle';
-
-            oscillator.frequency.value =
-                220;
-
-            gain.gain.setValueAtTime(
-                .0001,
-                now
-            );
-
-            gain.gain.exponentialRampToValueAtTime(
-                .06,
-                now + .01
-            );
-
-            gain.gain.exponentialRampToValueAtTime(
-                .0001,
-                now + .18
-            );
-
-            oscillator
-                .connect(gain)
-                .connect(context.destination);
-
-            oscillator.start(now);
-
-            oscillator.stop(
-                now + .2
-            );
-
-        } catch (error) {
-        }
+        playTone(
+            220,
+            "triangle",
+            0.06,
+            0.18
+        );
     }
 
 
@@ -795,6 +908,12 @@ h2 {
             const context =
                 createAudioContext();
 
+
+            if (!context) {
+                return;
+            }
+
+
             const now =
                 context.currentTime;
 
@@ -804,8 +923,12 @@ h2 {
                 783.99
             ];
 
+
             notes.forEach(
-                function (frequency, index) {
+                function (
+                    frequency,
+                    index
+                ) {
 
                     const oscillator =
                         context.createOscillator();
@@ -813,14 +936,164 @@ h2 {
                     const gain =
                         context.createGain();
 
+                    const start =
+                        now +
+                        index *
+                        0.12;
+
+
                     oscillator.type =
-                        'sine';
+                        "sine";
 
                     oscillator.frequency.value =
                         frequency;
 
-                    const start =
-                        now + index * .12;
 
                     gain.gain.setValueAtTime(
-                        .0001,
+                        0.0001,
+                        start
+                    );
+
+                    gain.gain.exponentialRampToValueAtTime(
+                        0.11,
+                        start + 0.01
+                    );
+
+                    gain.gain.exponentialRampToValueAtTime(
+                        0.0001,
+                        start + 0.20
+                    );
+
+
+                    oscillator
+                        .connect(gain)
+                        .connect(context.destination);
+
+
+                    oscillator.start(
+                        start
+                    );
+
+                    oscillator.stop(
+                        start + 0.22
+                    );
+
+                }
+            );
+
+
+            window.setTimeout(
+                function () {
+                    context.close();
+                },
+                700
+            );
+
+        } catch (error) {
+
+            /* Completion still works
+               if audio is unavailable. */
+
+        }
+    }
+
+
+    function launchConfetti() {
+
+        const reduceMotion =
+            window.matchMedia &&
+            window
+                .matchMedia(
+                    "(prefers-reduced-motion: reduce)"
+                )
+                .matches;
+
+
+        if (reduceMotion) {
+            return;
+        }
+
+
+        const colors = [
+            "#12355b",
+            "#174d63",
+            "#2a7899",
+            "#4fb7d8",
+            "#7fd4e8",
+            "#9fe6f5"
+        ];
+
+
+        celebration.innerHTML =
+            "";
+
+
+        for (
+            let i = 0;
+            i < 55;
+            i++
+        ) {
+
+            const piece =
+                document.createElement(
+                    "span"
+                );
+
+
+            piece.className =
+                "confetti";
+
+
+            piece.style.left =
+                Math.random() *
+                100 +
+                "vw";
+
+
+            piece.style.background =
+                colors[
+                    Math.floor(
+                        Math.random() *
+                        colors.length
+                    )
+                ];
+
+
+            piece.style.animationDelay =
+                Math.random() *
+                0.35 +
+                "s";
+
+
+            piece.style.animationDuration =
+                1.4 +
+                Math.random() *
+                0.9 +
+                "s";
+
+
+            celebration.appendChild(
+                piece
+            );
+        }
+
+
+        window.setTimeout(
+            function () {
+
+                celebration.innerHTML =
+                    "";
+
+            },
+            2600
+        );
+    }
+
+
+    updateStatus();
+
+})();
+</script>
+
+</body>
+</html>
